@@ -358,6 +358,32 @@
                 </div>
             </div>
         </div>
+          <h3>Cinto Social</h3>
+                        <div class="product-price">A partir de R$ 30,00</div>
+                        <div class="specs-list">
+                            <p><span>Categoria:</span> Acessórios</p>
+                        </div>
+
+                        <!-- Seleção de Cor para Cinto -->
+                        <div class="options-group">
+                            <label for="corCinto">Selecione a Cor:*</label>
+                            <select id="corCinto" class="options-select" onchange="verificarOutraCorMeia()">
+                                <option value="">-- Escolha a Cor --</option>
+                                <option value="Preto">Preto</option>
+                                <option value="Marrom">Marrom</option>
+                                <option value="Outra">Outra (especificar)</option>
+                            </select>
+                            <input type="text" id="outraCorCinto" class="options-input hidden" placeholder="Especifique a cor do Cinto">
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-pix" onclick="processarPixMeia()">Pagar com Pix</button>
+                        <button class="btn btn-whatsapp" onclick="processarWhatsAppMeia()">Pedir via WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+    </div>
 
         <div class="frete-box">
             <h3>Consultar Frete por CEP</h3>
