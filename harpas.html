@@ -1,320 +1,335 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Harpa Cristã - Beduíno Artigos Evangélicos</title>
-<link rel="stylesheet" href="manifest.json">
-<meta name="theme-color" content="#1a2530">
-<style>
-:root {
---primary: #1a2530;
---secondary: #d4af37;
---bg-light: #f8f9fa;
---text-dark: #333333;
---white: #ffffff;
---whatsapp: #25d366;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harpa Cristã - Beduíno Artigos Evangélicos</title>
+    <link rel="stylesheet" href="manifest.json">
+    <meta name="theme-color" content="#1a2530">
+    <style>
+        :root {
+            --primary: #1a2530;
+            --secondary: #d4af37;
+            --bg-light: #f8f9fa;
+            --text-dark: #333333;
+            --white: #ffffff;
+            --whatsapp: #25d366;
+        }
 
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-body {
-background-color: var(--bg-light);
-color: var(--text-dark);
-display: flex;
-flex-direction: column;
-min-height: 100vh;
-}
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-header {
-background-color: var(--primary);
-color: var(--white);
-text-align: center;
-padding: 1.5rem 1rem;
-border-bottom: 4px solid var(--secondary);
-}
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-bottom: 4px solid var(--secondary);
+        }
 
-header h1 {
-font-size: 1.6rem;
-margin-bottom: 0.3rem;
-}
+        header h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+        }
 
-header p.verse {
-font-style: italic;
-font-size: 0.85rem;
-color: #dcdcdc;
-max-width: 600px;
-margin: 0 auto;
-}
+        header p.verse {
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #dcdcdc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-main {
-flex: 1;
-max-width: 900px;
-width: 100%;
-margin: 0 auto;
-padding: 1.5rem 1rem;
-}
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
 
-.section-title {
-font-size: 1.3rem;
-margin-bottom: 1rem;
-color: var(--primary);
-border-left: 4px solid var(--secondary);
-padding-left: 8px;
-}
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            border-left: 4px solid var(--secondary);
+            padding-left: 8px;
+        }
 
-.product-list {
-display: flex;
-flex-direction: column;
-gap: 1.5rem;
-margin-bottom: 2rem;
-}
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
 
-.product-card {
-background: var(--white);
-border-radius: 8px;
-overflow: hidden;
-box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-display: flex;
-flex-direction: column;
-border: 1px solid #e0e0e0;
-}
+        .product-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e0e0e0;
+        }
 
-@media(min-width: 600px) {
-.product-card {
-flex-direction: row;
-}
-}
+        @media(min-width: 600px) {
+            .product-card {
+                flex-direction: row;
+            }
+        }
 
-.product-card img {
-width: 100%;
-max-width: 220px;
-height: 220px;
-object-fit: cover;
-background-color: #eee;
-margin: 0 auto;
-}
+        .product-card img {
+            width: 100%;
+            max-width: 220px;
+            height: 220px;
+            object-fit: cover;
+            background-color: #eee;
+            margin: 0 auto;
+        }
 
-.product-info {
-padding: 1.2rem;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-flex: 1;
-}
+        .product-info {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+        }
 
-.product-info h3 {
-font-size: 1.15rem;
-color: var(--primary);
-margin-bottom: 0.3rem;
-}
+        .product-info h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
 
-.product-price {
-font-size: 1.25rem;
-font-weight: bold;
-color: var(--secondary);
-margin-bottom: 0.8rem;
-}
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+        }
 
-.action-buttons {
-display: flex;
-gap: 0.5rem;
-flex-wrap: wrap;
-margin-top: 0.5rem;
-}
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
 
-.btn {
-padding: 0.5rem 1rem;
-border-radius: 4px;
-font-size: 0.9rem;
-font-weight: 600;
-text-decoration: none;
-cursor: pointer;
-border: none;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 0.3rem;
-}
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
 
-.btn-pix {
-background-color: var(--primary);
-color: var(--white);
-}
+        .btn-pix {
+            background-color: var(--primary);
+            color: var(--white);
+        }
 
-.btn-pix:hover {
-background-color: #2c3e50;
-}
+        .btn-pix:hover {
+            background-color: #2c3e50;
+        }
 
-.btn-whatsapp {
-background-color: var(--whatsapp);
-color: var(--white);
-}
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+            color: var(--white);
+        }
 
-.btn-whatsapp:hover {
-background-color: #1ebe5d;
-}
+        .btn-whatsapp:hover {
+            background-color: #1ebe5d;
+        }
 
-.search-console {
-background: var(--white);
-padding: 1.5rem;
-border-radius: 8px;
-border: 1px solid #e0e0e0;
-margin-bottom: 2rem;
-box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
+        /* Bloco de Calculadora de Frete */
+        .frete-box {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
 
-.search-console h3 {
-font-size: 1.1rem;
-color: var(--primary);
-margin-bottom: 0.5rem;
-}
+        .frete-box h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
 
-.search-console p {
-font-size: 0.85rem;
-color: #666;
-margin-bottom: 0.8rem;
-}
+        .frete-box p {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
 
-.search-input-group {
-display: flex;
-gap: 0.5rem;
-flex-wrap: wrap;
-}
+        .frete-input-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
 
-.search-input-group input {
-flex: 1;
-min-width: 200px;
-padding: 0.6rem;
-border: 1px solid #ccc;
-border-radius: 4px;
-font-size: 0.95rem;
-}
+        .frete-input-group input {
+            flex: 1;
+            min-width: 180px;
+            padding: 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
 
-.contact-box {
-background: var(--white);
-padding: 1.2rem;
-border-radius: 8px;
-text-align: center;
-border: 1px solid #e0e0e0;
-margin-bottom: 2rem;
-}
+        #freteResultado {
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
 
-.contact-box p {
-font-size: 0.95rem;
-margin-bottom: 0.8rem;
-}
+        .back-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
 
-.back-container {
-text-align: center;
-margin-bottom: 2rem;
-}
+        .btn-back {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
 
-.btn-back {
-background-color: transparent;
-color: var(--primary);
-border: 2px solid var(--primary);
-padding: 0.6rem 1.5rem;
-border-radius: 4px;
-font-weight: bold;
-text-decoration: none;
-display: inline-block;
-transition: all 0.2s;
-}
+        .btn-back:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
 
-.btn-back:hover {
-background-color: var(--primary);
-color: var(--white);
-}
-
-footer {
-background-color: var(--primary);
-color: var(--white);
-text-align: center;
-padding: 1rem;
-font-size: 0.85rem;
-margin-top: auto;
-}
-</style>
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-<h1>Beduíno - Artigos Evangélicos</h1>
-<p class="verse">"Conheçamos e prossigamos em conhecer ao SENHOR;" — Oséias 6:3</p>
-</header>
+    <header>
+        <h1>Beduíno - Artigos Evangélicos</h1>
+        <p class="verse">"Conheçamos e prossigamos em conhecer ao SENHOR;" — Oséias 6:3</p>
+    </header>
 
-<main>
-<h2 class="section-title">Catálogo de Harpas</h2>
+    <main>
+        <h2 class="section-title">Catálogo de Harpas</h2>
 
-<div class="product-list">
-<!-- Harpa Cristã / Pentecostal -->
-<div class="product-card">
-<img src="img-harpa.png" alt="Harpa Pentecostal Letra Gigante" onerror="this.src='https://via.placeholder.com/200?text=Harpa+Crista'">
-<div class="product-info">
-<div>
-<h3>Harpa Pentecostal (Letra Gigante)</h3>
-<div class="product-price">Rlatex
- 33,90&lt;/div&gt; &lt;p style="font-size: 0.85rem; color: #666; margin-bottom: 0.5rem;"&gt;Cânticos e louvores, 692 hinos, com letra gigante para facilitar a leitura[span_1](start_span)[span_1](end_span).&lt;/p&gt; &lt;/div&gt; &lt;div class="action-buttons"&gt; &lt;button class="btn btn-pix" onclick="pagarPix('Harpa Pentecostal', '33.90')"&gt;Pagar com Pix&lt;/button&gt; &lt;a href="https://wa.me/5566984666186?text=Olá!%20Gostaria%20de%20pedir%20a%20Harpa%20Pentecostal%20(R
+        <div class="product-list">
+            <!-- Harpa Cristã / Pentecostal -->
+            <div class="product-card">
+                <img src="img-harpa.png" alt="Harpa Pentecostal Letra Gigante" onerror="this.src='https://via.placeholder.com/200?text=Harpa+Crista'">
+                <div class="product-info">
+                    <div>
+                        <h3>Harpa Pentecostal (Letra Gigante)</h3>
+                        <div class="product-price">R$ 33,90</div>
+                        <p style="font-size: 0.85rem; color: #666; margin-bottom: 0.5rem;">Cânticos e louvores, 692 hinos, com letra gigante para facilitar a leitura.</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-pix" onclick="pagarPix('Harpa Pentecostal', '33.90')">Pagar com Pix</button>
+                        <a href="https://wa.me/5566984666186?text=Olá!%20Desejo%20comprar%20a%20Harpa%20Pentecostal%20no%20valor%20de%20R%24%2033,90%20%2B%20valor%20do%20Frete." target="_blank" class="btn btn-whatsapp">Pedir via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-%2033,90)." target="_blank" class="btn btn-whatsapp">Pedir via WhatsApp</a>
-</div>
-</div>
-</div>
-</div>
+        <!-- Consultar Frete por CEP -->
+        <div class="frete-box">
+            <h3>Consultar Frete por CEP</h3>
+            <p>Informe seu CEP para calcular o envio (<strong>Itanhangá-MT tem Entrega Grátis!</strong>):</p>
+            <div class="frete-input-group">
+                <input type="text" id="cepInput" placeholder="Digite seu CEP (ex: 78578-000)" maxlength="9">
+                <button class="btn btn-pix" onclick="calcularFrete()">Consultar</button>
+            </div>
+            <div id="freteResultado"></div>
+        </div>
 
-<!-- Console de Busca Personalizada -->
-<div class="search-console">
-<h3>Não Encontrou o modelo desejado?</h3>
-<p>Digite a cor ou acabamento específico da Harpa que procura:</p>
-<div class="search-input-group">
-<input type="text" id="customSearchInput" placeholder="Ex: Harpa com capa marrom zíper...">
-<button class="btn btn-whatsapp" onclick="enviarBuscaPersonalizada()">Enviar no WhatsApp</button>
-</div>
-</div>
+        <!-- Botão Voltar -->
+        <div class="back-container">
+            <a href="index.html" class="btn-back">← Voltar ao Menu Principal</a>
+        </div>
+    </main>
 
-<!-- Bloco de atendimento / WhatsApp geral -->
-<div class="contact-box">
-<h3>Pedidos e Formas de Pagamento</h3>
-<p>Atendimento direto pelo WhatsApp: <strong>(66) 98466-6186</strong></p>
-<a href="https://wa.me/5566984666186?text=Olá!%20Vim%20pelo%20site%20da%20Beduíno%20e%20gostaria%20de%20tirar%20dúvidas%20sobre%20as%20Harpas." target="_blank" class="btn btn-whatsapp">Conversar no WhatsApp</a>
-</div>
+    <footer>
+        <p>&copy; 2026 Beduíno Artigos Evangélicos. Todos os direitos reservados.</p>
+    </footer>
 
-<!-- Botão Voltar -->
-<div class="back-container">
-<a href="index.html" class="btn-back">← Voltar ao Menu Principal</a>
-</div>
-</main>
+    <!-- Script de Automação de Pagamento Pix e Consulta de CEP -->
+    <script>
+        const chavePix = "gilinbrazil@gmail.com";
 
-<footer>
-<p>© 2026 Beduíno Artigos Evangélicos. Todos os direitos reservados.</p>
-</footer>
+        function pagarPix(produto, valor) {
+            navigator.clipboard.writeText(chavePix).then(() => {
+                alert(`Chave Pix copiada: ${chavePix}\n\nProduto: ${produto}\nValor: R$ ${valor}\n\nCole a chave no aplicativo do seu banco para realizar o pagamento e envie o comprovante no WhatsApp!`);
+            }).catch(err => {
+                alert(`Chave Pix: ${chavePix} (Erro ao copiar automaticamente)`);
+            });
+        }
 
-<!-- Script de Automação de Pagamento Pix e Busca -->
-<script>
-const chavePix = "gilinbrazil@gmail.com";
+        function calcularFrete() {
+            let cep = document.getElementById("cepInput").value.replace(/\D/g, '');
+            const resultado = document.getElementById("freteResultado");
 
-function pagarPix(produto, valor) {
-navigator.clipboard.writeText(chavePix).then(() => {
-alert(Chave Pix copiada: ${chavePix}\n\nProduto: ${produto}\nValor: R$${valor}\n\nCole a chave no aplicativo do seu banco para realizar o pagamento e envie o comprovante no WhatsApp!);
-}).catch(err => {
-alert(Chave Pix: ${chavePix} (Erro ao copiar automaticamente)`);
-});
-}
+            if (cep.length !== 8) {
+                resultado.style.color = "#c0392b";
+                resultado.innerHTML = "Por favor, digite um CEP válido com 8 dígitos.";
+                return;
+            }
 
-function enviarBuscaPersonalizada() {
-const termo = document.getElementById("customSearchInput").value.trim();
-if(!termo) {
-alert("Por favor, digite o que você está procurando antes de enviar.");
-return;
-}
-const mensagem = encodeURIComponent(Olá! Não encontrei no catálogo padrão e gostaria de procurar por esta Harpa:${termo}); window.open(https://wa.me/5566984666186?text=${mensagem}`, '_blank');
-}
-</script>
+            // Consulta API pública de CEP ViaCEP
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.erro) {
+                        resultado.style.color = "#c0392b";
+                        resultado.innerHTML = "CEP não encontrado. Verifique e tente novamente.";
+                        return;
+                    }
+
+                    // Verifica se é Itanhangá - MT (ou faixa de CEP de Itanhangá/região próxima se desejar, validando pela cidade)
+                    if (data.localidade && data.localidade.toLowerCase() === "itanhangá" && data.uf === "MT") {
+                        resultado.style.color = "#27ae60";
+                        resultado.innerHTML = `📍 Localidade: ${data.localidade} - ${data.uf}<br>🎉 <strong>Frete Grátis</strong> para Itanhangá-MT!`;
+                    } else {
+                        resultado.style.color = "#d4af37";
+                        resultado.innerHTML = `📍 Localidade: ${data.localidade || 'Região'} - ${data.uf || ''}<br>📦 Frete sob consulta via WhatsApp (Sedex/PAC padrão).`;
+                    }
+                })
+                .catch(error => {
+                    resultado.style.color = "#c0392b";
+                    resultado.innerHTML = "Erro ao consultar o CEP. Tente novamente mais tarde.";
+                });
+        }
+    </script>
 </body>
 </html>
