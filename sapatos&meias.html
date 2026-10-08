@@ -512,11 +512,14 @@ function verificarOutraCorCinto() {
                 alert("Por favor, selecione a Cor e especifique se necessário!");
                 return;
             }
+               
 
             const textoMensagem = `Olá! Desejo comprar a Meia Social (Cor: ${corFinal}) no valor a partir de R$ 10,00 + valor do Frete.`;
             const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(textoMensagem)}`;
             window.open(urlWhatsApp, '_blank');
         }
+        
+   // Cinto - Pix
         
   function processarPixCinto() {
             const corSelecionada = document.getElementById("corCinto").value;
@@ -548,6 +551,7 @@ function verificarOutraCorCinto() {
             const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(textoMensagem)}`;
             window.open(urlWhatsApp, '_blank');
         }
+        
         // Frete
         function calcularFrete() {
             let cep = document.getElementById("cepInput").value.replace(/\D/g, '');
