@@ -221,6 +221,170 @@ margin-top: auto;
 </header>
 
 <main>
+  <!-- Botão para abrir o Crediário Próprio -->
+<button class="btn btn-crediario" onclick="abrirModalCrediario()" style="background-color: #d4af37; color: #1a2530; font-weight: bold; padding: 0.6rem 1.2rem; border: none; border-radius: 4px; cursor: pointer;">
+    📄 Simular Crediário Próprio (Até 3x)
+</button>
+
+<!-- Modal do Crediário -->
+<div id="modalCrediario" class="modal-overlay hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 1rem;">
+    <div class="modal-content" style="background: #ffffff; padding: 1.5rem; border-radius: 8px; width: 100%; max-width: 500px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+            <h3 style="color: #1a2530; font-size: 1.2rem;">Crediário Próprio - Beduíno</h3>
+            <button onclick="fecharModalCrediario()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; font-weight: bold; color: #c0392b;">&times;</button>
+        </div>
+
+        <form id="formCrediario" onsubmit="gerarBoletoCrediario(event)">
+            <div style="margin-bottom: 0.8rem;">
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Nome Completo:*</label>
+                <input type="text" id="credNome" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <div style="margin-bottom: 0.8rem;">
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">CPF:*</label>
+                <input type="text" id="credCpf" placeholder="000.000.000-00" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <div style="margin-bottom: 0.8rem;">
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Endereço Completo:*</label>
+                <input type="text" id="credEndereco" placeholder="Rua, Número, Bairro, Cidade - UF" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <div style="margin-bottom: 0.8rem;">
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Valor Total da Compra (R$):*</label>
+                <input type="number" id="credValor" step="0.01" min="10" placeholder="Ex: 90.00" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <div style="margin-bottom: 1.2rem;">
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Quantidade de Parcelas (Máximo 3x):*</label>
+                <select id="credParcelas" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: #fff;">
+                    <option value="1">1x (À vista)</option>
+                    <option value="2">2x (Parcelado)</option>
+                    <option value="3">3x (Parcelado)</option>
+                </select>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 0.8rem; border-radius: 4px; font-size: 0.8rem; color: #555; margin-bottom: 1rem; border-left: 3px solid #d4af37;">
+                <strong>Instruções de Pagamento:</strong> O pagamento de cada parcela deve ser feito via Pix para a chave <strong>gilinbrazil@gmail.com</strong> e o comprovante enviado no WhatsApp abaixo.
+            </div>
+
+            <button type="submit" style="width: 100%; background: #1a2530; color: #fff; padding: 0.7rem; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 0.95rem;">
+                Gerar Carnê em PDF e Enviar Pedido
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Importação da biblioteca jsPDF para gerar o PDF no navegador -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    function abrirModalCrediario() {
+        document.getElementById('modalCrediario').style.display = 'flex';
+    }
+
+    function fecharModalCrediario() {
+        document.getElementById('modalCrediario').style.display = 'none';
+    }
+
+    function gerarBoletoCrediario(event) {
+        event.preventDefault();
+
+        const nome = document.getElementById('credNome').value.trim();
+        const cpf = document.getElementById('credCpf').value.trim();
+        const endereco = document.getElementById('credEndereco').value.trim();
+        const valorTotal = parseFloat(document.getElementById('credValor').value);
+        const qtdParcelas = parseInt(document.getElementById('credParcelas').value);
+
+        if (qtdParcelas > 3) {
+            alert("O número máximo de parcelas permitido é 3.");
+            return;
+        }
+
+        const valorParcela = (valorTotal / qtdParcelas).toFixed(2);
+
+        // Inicializa o jsPDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Cabeçalho da Empresa no PDF
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.setTextColor(26, 37, 48);
+        doc.text("BEDUÍNO - ARTIGOS EVANGÉLICOS", 105, 15, { align: "center" });
+
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.text("Rua Leonina Proença Ribeiro, 86 - Centro - Itanhangá-MT", 105, 21, { align: "center" });
+        doc.text("E-mail: escolateologicavance@gmail.com | WhatsApp: (66) 98466-6186", 105, 26, { align: "center" });
+        
+        doc.setLineWidth(0.5);
+        doc.line(15, 30, 195, 30);
+
+        // Dados do Cliente
+        doc.setFont("helvetica", "bold");
+        doc.text("COMPROVANTE DE CREDIÁRIO PRÓPRIO", 15, 38);
+        
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.text(`Cliente: ${nome}`, 15, 46);
+        doc.text(`CPF: ${cpf}`, 15, 52);
+        doc.text(`Endereço: ${endereco}`, 15, 58);
+        doc.text(`Valor Total: R$ ${valorTotal.toFixed(2)}`, 15, 64);
+
+        doc.line(15, 70, 195, 70);
+
+        // Geração das Parcelas no PDF
+        let posY = 80;
+        let hoje = new Date();
+
+        for (let i = 1; i <= qtdParcelas; i++) {
+            let dataVencimento = new Date(hoje);
+            dataVencimento.setMonth(hoje.getMonth() + i);
+            let dataFormatada = dataVencimento.toLocaleDateString('pt-BR');
+
+            doc.setFont("helvetica", "bold");
+            doc.text(`Parcela ${i} de ${qtdParcelas}`, 15, posY);
+            
+            doc.setFont("helvetica", "normal");
+            doc.text(`Vencimento: ${dataFormatada}`, 15, posY + 6);
+            doc.text(`Valor da Parcela: R$ ${valorParcela}`, 15, posY + 12);
+            doc.text(`Pagamento via Pix: gilinbrazil@gmail.com`, 15, posY + 18);
+
+            doc.setLineDash([2, 2], 0);
+            doc.line(15, posY + 23, 195, posY + 23);
+            doc.setLineDash([], 0);
+
+            posY += 30;
+        }
+
+        // Rodapé do PDF
+        doc.setFontSize(8);
+        doc.setTextColor(100, 100, 100);
+        doc.text("Guarde este carnê e envie o comprovante de pagamento via WhatsApp.", 105, 285, { align: "center" });
+
+        // Salvar o arquivo PDF automaticamente para o cliente
+        doc.save(`Carne_Credito_${nome.replace(/\s+/g, '_')}.pdf`);
+
+        // Mensagem para enviar para o seu WhatsApp com os dados do crediário
+        let mensagemWhats = `*NOVO PEDIDO VIA CREDIÁRIO PRÓPRIO*%0A%0A` +
+                            `*Cliente:* ${nome}%0A` +
+                            `*CPF:* ${cpf}%0A` +
+                            `*Endereço:* ${endereco}%0A` +
+                            `*Valor Total:* R$ ${valorTotal.toFixed(2)}%0A` +
+                            `*Parcelamento:* ${qtdParcelas}x de R$ ${valorParcela}%0A%0A` +
+                            `O cliente gerou o carnê e aguarda aprovação!`;
+
+        const numeroWhatsApp = "5566984666186";
+        const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemWhats}`;
+
+        fecharModalCrediario();
+        
+        // Abre o WhatsApp para você receber o comprovante e os dados do cliente
+        window.open(urlWhatsApp, '_blank');
+        alert("Carnê gerado em PDF com sucesso! O WhatsApp foi aberto para você receber a notificação do pedido.");
+    }
+</script>
 <!-- Catálogo de Produtos -->
 <section>
 <h2>Catálogo</h2>
