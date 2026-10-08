@@ -434,7 +434,16 @@
                 inputOutra.value = "";
             }
         }
-
+function verificarOutraCorCinto() {
+            const select = document.getElementById("corCinto");
+            const inputOutra = document.getElementById("outraCorCinto");
+            if (select.value === "Outra") {
+                inputOutra.classList.remove("hidden");
+            } else {
+                inputOutra.classList.add("hidden");
+                inputOutra.value = "";
+            }
+        }
         function obterCorFinal(selectId, inputId) {
             const selectVal = document.getElementById(selectId).value;
             if (selectVal === "Outra") {
@@ -508,7 +517,37 @@
             const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(textoMensagem)}`;
             window.open(urlWhatsApp, '_blank');
         }
+        
+  function processarPixCinto() {
+            const corSelecionada = document.getElementById("corCinto").value;
+            const corFinal = obterCorFinal("corCinto", "outraCorCinto");
 
+            if (!corSelecionada || (corSelecionada === "Outra" && !corFinal)) {
+                alert("Por favor, selecione a Cor e especifique se necessário!");
+                return;
+            }
+
+            navigator.clipboard.writeText(chavePix).then(() => {
+                alert(`Chave Pix copiada: ${chavePix}\n\nProduto: Cinto Social\nCor: ${corFinal}\nValor: a partir de R$ 40,00\n\nCole a chave no aplicativo do seu banco e envie o comprovante no WhatsApp!`);
+            }).catch(err => {
+                alert(`Chave Pix: ${chavePix} (Erro ao copiar automaticamente)`);
+            });
+        }
+
+        // Cinto - WhatsApp
+        function processarWhatsAppCinto() {
+            const corSelecionada = document.getElementById("corCinto").value;
+            const corFinal = obterCorFinal("corCinto", "outraCorCinto");
+
+            if (!corSelecionada || (corSelecionada === "Outra" && !corFinal)) {
+                alert("Por favor, selecione a Cor e especifique se necessário!");
+                return;
+            }
+
+            const textoMensagem = `Olá! Desejo comprar Cinto Social (Cor: ${corFinal}) no valor a partir de R$ 40,00 + valor do Frete.`;
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(textoMensagem)}`;
+            window.open(urlWhatsApp, '_blank');
+        }
         // Frete
         function calcularFrete() {
             let cep = document.getElementById("cepInput").value.replace(/\D/g, '');
