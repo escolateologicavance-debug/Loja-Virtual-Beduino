@@ -456,18 +456,35 @@ alert(Chave Pix copiada: ${chavePix}\n\nProduto: ${nomeProduto}\nCor: ${corFinal
 });
 }
 
-function processarWhatsAppMeia(nomeProduto, valor, corId, corInputId) {
-const corSelecionada = document.getElementById(corId).value;
-const corFinal = obterCorFinal(corId, corInputId);
+        function processarWhatsApp(nomeProduto, valor, tamId, corId, corInputId) {
+            const tamanho = document.getElementById(tamId).value;
+            const corSelecionada = document.getElementById(corId).value;
+            const corFinal = obterCorFinal(corId, corInputId);
 
-if (!corSelecionada || (corSelecionada === "Outra" && !corFinal)) {
-alert("Por favor, selecione a Cor e especifique se necessário!");
-return;
-}
+            if (!tamanho || !corSelecionada || (corSelecionada === "Outra" && !corFinal)) {
+                alert("Por favor, selecione o Tamanho, a Cor e especifique se necessário!");
+                return;
+            }
 
-const textoMensagem = Olá! Desejo comprar a ${nomeProduto} (Cor: ${corFinal}) no valor a partir de R$${valor} + valor do Frete.;
-window.location.href = https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(textoMensagem)};
-}
+            const textoMensagem = `Olá! Desejo comprar o ${nomeProduto} (Tamanho: ${tamanho}, Cor: ${corFinal}) no valor a partir de R$ ${valor} + valor do Frete.`;
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(textoMensagem)}`;
+            window.open(urlWhatsApp, '_blank');
+        }
+
+        function processarWhatsAppMeia(nomeProduto, valor, corId, corInputId) {
+            const corSelecionada = document.getElementById(corId).value;
+            const corFinal = obterCorFinal(corId, corInputId);
+
+            if (!corSelecionada || (corSelecionada === "Outra" && !corFinal)) {
+                alert("Por favor, selecione a Cor e especifique se necessário!");
+                return;
+            }
+
+            const textoMensagem = `Olá! Desejo comprar a ${nomeProduto} (Cor: ${corFinal}) no valor a partir de R$ ${valor} + valor do Frete.`;
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(textoMensagem)}`;
+            window.open(urlWhatsApp, '_blank');
+        }
+
 
 function calcularFrete() {
 let cep = document.getElementById("cepInput").value.replace(/\D/g, '');
