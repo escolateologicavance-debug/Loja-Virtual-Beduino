@@ -38,6 +38,7 @@
             text-align: center;
             padding: 1.5rem 1rem;
             border-bottom: 4px solid var(--secondary);
+            position: relative;
         }
 
         header h1 {
@@ -58,7 +59,7 @@
             position: fixed;
             top: 15px;
             right: 15px;
-            z-index: 1000;
+            z-index: 99999;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
@@ -71,9 +72,9 @@
             object-fit: cover;
             border: 2px solid var(--secondary);
             cursor: pointer;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4);
             background-color: var(--primary);
+            display: block;
         }
 
         .beduino-avatar:hover {
@@ -310,7 +311,7 @@
         #zoomModal {
             display: none;
             position: fixed;
-            z-index: 9999;
+            z-index: 999999;
             top: 0;
             left: 0;
             width: 100%;
@@ -339,7 +340,7 @@
             cursor: pointer;
             background: none;
             border: none;
-            z-index: 10000;
+            z-index: 1000000;
         }
 
         footer {
@@ -355,18 +356,17 @@
 <body>
 
     <header>
-        
+        <!-- Avatar Circular Flutuante posicionado corretamente no canto superior direito -->
+        <div class="beduino-avatar-container">
+            <img src="img-beduino.png" alt="Beduíno" class="beduino-avatar" onclick="acionarBeduino()" onerror="this.src='https://via.placeholder.com/60?text=Beduino'">
+            <div id="beduinoBalao" class="beduino-balao">
+                A paz do Senhor!<br>Boas Compras!
+            </div>
+        </div>
+
         <h1>Beduíno - Artigos Evangélicos</h1>
         <p class="verse">"Conheçamos e prossigamos em conhecer ao SENHOR; a sua alva é como a saída do sol, e ele a nós virá como a chuva, como chuva serôdia que rega a terra." — Oséias 6:3</p>
     </header>
-    
-     <!-- Avatar Circular Flutuante no Canto Superior Direito -->
-    <div class="beduino-avatar-container">
-        <img src="img-beduino.png" alt="Beduíno" class="beduino-avatar" onclick="acionarBeduino()" onerror="this.src='https://via.placeholder.com/60?text=Beduino'">
-        <div id="beduinoBalao" class="beduino-balao">
-            A paz do Senhor!<br>Boas Compras!
-        </div>
-    </div>
 
     <main>
         <h2 class="section-title">Catálogo de Bíblias</h2>
