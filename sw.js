@@ -1,4 +1,4 @@
-const CACHE_NAME = 'beduino-store-v1';
+const CACHE_NAME = 'beduino-store-v2';
 const assetsToCache = [
 'index.html',
 'manifest.json',
