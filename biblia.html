@@ -54,77 +54,84 @@
             margin: 0 auto;
         }
 
-       /* Avatar Flutuante Interativo e Arrastável */
-.beduino-avatar-container {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    touch-action: none; /* Crucial para o toque arrastar suavemente no celular */
-    cursor: grab;
-}
+        /* Avatar Flutuante do Beduíno no Canto Superior Direito */
+        .beduino-avatar-container {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
 
-.beduino-avatar-container:active {
-    cursor: grabbing;
-}
+        .beduino-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+            background-color: var(--primary);
+            display: block;
+        }
 
-.beduino-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--secondary);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    background-color: var(--primary);
-    display: block;
-    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
-}
+        .beduino-avatar:hover {
+            transform: scale(1.08);
+        }
 
-/* Estado Expandido em Tela Cheia por 4 Segundos */
-.beduino-avatar.expandido {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) scale(1) !important;
-    width: 85vw !important;
-    max-width: 380px !important;
-    height: 85vw !important;
-    max-height: 380px !important;
-    border-radius: 20px !important;
-    z-index: 1000000;
-    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.85), 0 10px 30px rgba(0,0,0,0.6);
-}
+        .beduino-balao {
+            display: none;
+            position: absolute;
+            top: 65px;
+            right: 0;
+            background: var(--white);
+            color: var(--primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: 180px;
+            text-align: center;
+            border: 1px solid var(--secondary);
+            animation: fadeIn 0.3s ease;
+        }
 
-.beduino-balao {
-    display: none;
-    position: absolute;
-    top: 70px;
-    right: 0;
-    background: var(--white);
-    color: var(--primary);
-    padding: 12px 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    font-size: 0.9rem;
-    font-weight: 600;
-    width: 190px;
-    text-align: center;
-    border: 1px solid var(--secondary);
-    z-index: 1000001;
-}
+        .beduino-balao::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 20px;
+            width: 10px;
+            height: 10px;
+            background: var(--white);
+            transform: rotate(45deg);
+            border-top: 1px solid var(--secondary);
+            border-left: 1px solid var(--secondary);
+        }
 
-.beduino-avatar.expandido ~ .beduino-balao {
-    display: block !important;
-    position: fixed;
-    top: calc(50% + 210px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 280px;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            border-left: 4px solid var(--secondary);
+            padding-left: 8px;
+        }
 
         /* Lista de Produtos (Bíblias) */
         .product-list {
@@ -349,14 +356,13 @@
 <body>
 
     <header>
-        <!-- Avatar Arrastável e Expansível -->
-<div id="avatarContainer" class="beduino-avatar-container">
-    <img src="img-beduino.png" alt="Beduíno" class="beduino-avatar" id="avatarImg">
-    <div id="beduinoBalao" class="beduino-balao">
-        A paz do Senhor!<br>Boas Compras!
-    </div>
-</div>
-
+        <!-- Avatar Circular Flutuante posicionado corretamente no canto superior direito -->
+        <div class="beduino-avatar-container">
+            <img src="img-beduino.png" alt="Beduíno" class="beduino-avatar" onclick="acionarBeduino()" onerror="this.src='https://via.placeholder.com/60?text=Beduino'">
+            <div id="beduinoBalao" class="beduino-balao">
+                A paz do Senhor!<br>Boas Compras!
+            </div>
+        </div>
 
         <h1>Beduíno - Artigos Evangélicos</h1>
         <p class="verse">"Conheçamos e prossigamos em conhecer ao SENHOR; a sua alva é como a saída do sol, e ele a nós virá como a chuva, como chuva serôdia que rega a terra." — Oséias 6:3</p>
@@ -545,77 +551,5 @@
             window.open(`https://wa.me/5566984666186?text=${mensagem}`, '_blank');
         }
     </script>
-    <script>
-    const container = document.getElementById('avatarContainer');
-    const avatarImg = document.getElementById('avatarImg');
-    const balao = document.getElementById('beduinoBalao');
-    
-    let isDragging = false;
-    let startX, startY, initialX, initialY;
-    let hasMoved = false;
-    let temporizadorBeduino = null;
-
-    // Eventos para Arrastar (Mouse e Toque)
-    container.addEventListener('pointerdown', dragStart);
-    document.addEventListener('pointermove', drag);
-    document.addEventListener('pointerup', dragEnd);
-
-    function dragStart(e) {
-        isDragging = true;
-        hasMoved = false;
-        startX = e.clientX;
-        startY = e.clientY;
-        
-        const rect = container.getBoundingClientRect();
-        initialX = rect.left;
-        initialY = rect.top;
-        
-        container.style.position = 'fixed';
-        container.style.right = 'auto';
-        container.style.top = initialY + 'px';
-        container.style.left = initialX + 'px';
-        
-        container.setPointerCapture(e.pointerId);
-    }
-
-    function drag(e) {
-        if (!isDragging) return;
-        
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-        
-        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-            hasMoved = true;
-        }
-        
-        container.style.left = (initialX + dx) + 'px';
-        container.style.top = (initialY + dy) + 'px';
-    }
-
-    function dragEnd(e) {
-        if (!isDragging) return;
-        isDragging = false;
-
-        // Se o usuário apenas tocou (sem arrastar), ativa a expansão por 4 segundos!
-        if (!hasMoved) {
-            acionarExpansaoBeduino();
-        }
-    }
-
-    function acionarExpansaoBeduino() {
-        avatarImg.classList.add('expandido');
-        balao.style.display = 'block';
-
-        if (temporizadorBeduino) {
-            clearTimeout(temporizadorBeduino);
-        }
-
-        temporizadorBeduino = setTimeout(() => {
-            avatarImg.classList.remove('expandido');
-            balao.style.display = 'none';
-        }, 4000);
-    }
-</script>
-
 </body>
 </html>
