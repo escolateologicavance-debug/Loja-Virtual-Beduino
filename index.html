@@ -10,281 +10,652 @@
 <!-- Ícones e Estilos -->
 <style>
 :root {
---primary: #1a2530;
---secondary: #d4af37; /* Tom dourado elegante */
---bg-light: #f8f9fa;
---text-dark: #333333;
---white: #ffffff;
+    --primary: #1a2530;
+    --secondary: #d4af37; /* Tom dourado elegante */
+    --bg-light: #f8f9fa;
+    --text-dark: #333333;
+    --white: #ffffff;
+    --whatsapp: #25d366;
 }
 
 * {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-background-color: var(--bg-light);
-color: var(--text-dark);
-display: flex;
-flex-direction: column;
-min-height: 100vh;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
-background-color: var(--primary);
-color: var(--white);
-text-align: center;
-padding: 0;
-border-bottom: 4px solid var(--secondary);
-overflow: hidden;
+    background-color: var(--primary);
+    color: var(--white);
+    text-align: center;
+    padding: 0;
+    border-bottom: 4px solid var(--secondary);
+    overflow: hidden;
 }
 
 header img.banner-capa {
-width: 100%;
-max-height: 320px;
-object-fit: cover;
-display: block;
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    display: block;
 }
 
 header .verse-box {
-padding: 0.8rem 1rem;
-background-color: var(--primary);
-font-style: italic;
-font-size: 0.85rem;
-color: #dcdcdc;
-border-top: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 0.8rem 1rem;
+    background-color: var(--primary);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #dcdcdc;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 main {
-flex: 1;
-max-width: 1200px;
-width: 100%;
-margin: 0 auto;
-padding: 1.5rem 1rem;
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
 }
 
 section h2 {
-font-size: 1.3rem;
-margin-bottom: 1rem;
-color: var(--primary);
-border-left: 4px solid var(--secondary);
-padding-left: 8px;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    border-left: 4px solid var(--secondary);
+    padding-left: 8px;
 }
 
 /* Grade de Categorias (Catálogo) */
 .catalog-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-gap: 1rem;
-margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .catalog-card {
-background: var(--white);
-border-radius: 8px;
-overflow: hidden;
-box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-text-decoration: none;
-color: var(--text-dark);
-text-align: center;
-transition: transform 0.2s, box-shadow 0.2s;
-display: flex;
-flex-direction: column;
-border: 1px solid #e0e0e0;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    text-decoration: none;
+    color: var(--text-dark);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
 }
 
 .catalog-card:hover {
-transform: translateY(-3px);
-box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-border-color: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border-color: var(--secondary);
 }
 
 .catalog-card img {
-width: 100%;
-height: 120px;
-object-fit: cover;
-background-color: #eee;
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    background-color: #eee;
 }
 
 .catalog-card span {
-padding: 0.75rem 0.5rem;
-font-size: 0.9rem;
-font-weight: 600;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 /* Vitrine de Cursos AVANCE */
 .avance-banner {
-background: linear-gradient(135deg, #1a2530, #2c3e50);
-color: var(--white);
-padding: 1.5rem;
-border-radius: 8px;
-text-align: center;
-margin-bottom: 2rem;
-border: 1px solid var(--secondary);
+    background: linear-gradient(135deg, #1a2530, #2c3e50);
+    color: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 2rem;
+    border: 1px solid var(--secondary);
 }
 
 .avance-banner h3 {
-margin-bottom: 0.5rem;
-color: var(--secondary);
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
 }
 
 .avance-banner p {
-font-size: 0.9rem;
-margin-bottom: 1rem;
-color: #ecf0f1;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: #ecf0f1;
 }
 
 .btn-avance {
-display: inline-block;
-background-color: var(--secondary);
-color: var(--primary);
-padding: 0.6rem 1.2rem;
-border-radius: 4px;
-font-weight: bold;
-text-decoration: none;
-transition: background 0.2s;
+    display: inline-block;
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s;
 }
 
 .btn-avance:hover {
-background-color: #f39c12;
+    background-color: #f39c12;
 }
 
 /* Seção PIX */
 .pix-section {
-background: var(--white);
-padding: 1.2rem;
-border-radius: 8px;
-text-align: center;
-box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-border: 1px solid #e0e0e0;
-margin-bottom: 2rem;
+    background: var(--white);
+    padding: 1.2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
 }
 
 .pix-section h3 {
-font-size: 1.1rem;
-margin-bottom: 0.5rem;
-color: var(--primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
 }
 
 .pix-key-box {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 0.5rem;
-background: var(--bg-light);
-padding: 0.6rem;
-border-radius: 4px;
-border: 1px dashed var(--secondary);
-margin-top: 0.5rem;
-word-break: break-all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--bg-light);
+    padding: 0.6rem;
+    border-radius: 4px;
+    border: 1px dashed var(--secondary);
+    margin-top: 0.5rem;
+    word-break: break-all;
 }
 
 .pix-key-box code {
-font-weight: bold;
-color: var(--text-dark);
+    font-weight: bold;
+    color: var(--text-dark);
 }
 
 .btn-copy {
-background-color: var(--primary);
-color: var(--white);
-border: none;
-padding: 0.4rem 0.8rem;
-border-radius: 4px;
-cursor: pointer;
-font-size: 0.85rem;
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
 }
 
 .btn-copy:active {
-background-color: var(--secondary);
-color: var(--primary);
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+/* Seção Inferior e Elementos Novos */
+.bottom-section {
+    margin-bottom: 2rem;
+}
+
+.video-container {
+    background: #ffffff;
+    padding: 1.2rem;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.video-container h3 {
+    color: #1a2530;
+    margin-bottom: 0.5rem;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-top: 0.8rem;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+@media(min-width: 600px) {
+    .quick-actions {
+        flex-direction: row;
+    }
+}
+
+.btn-action {
+    flex: 1;
+    padding: 0.85rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95rem;
+    display: block;
+}
+
+.btn-pix-main {
+    background-color: #1a2530;
+    color: #ffffff;
+}
+
+.btn-faq {
+    background-color: #d4af37;
+    color: #1a2530;
+}
+
+.btn-wsp {
+    background-color: var(--whatsapp);
+    color: #ffffff;
+}
+
+.contact-box {
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.contact-box a {
+    color: #1a2530;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Modal FAQ */
+.faq-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    z-index: 999999;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.faq-modal-content {
+    background: #ffffff;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    padding: 1.5rem;
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+}
+
+.faq-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: #666;
+}
+
+.faq-item {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.8rem;
+    text-align: left;
+}
+
+.faq-item h4 {
+    color: #1a2530;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+}
+
+.faq-item p {
+    color: #555;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.feedback-section {
+    background: #ffffff;
+    padding: 1.2rem;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
+}
+
+.feedback-section h3 {
+    color: #1a2530;
+    margin-bottom: 0.3rem;
+}
+
+.feedback-section textarea {
+    width: 100%;
+    height: 80px;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 0.6rem;
+    resize: vertical;
+    font-family: inherit;
 }
 
 footer {
-background-color: var(--primary);
-color: var(--white);
-text-align: center;
-padding: 1rem;
-font-size: 0.85rem;
-margin-top: auto;
+    background-color: var(--primary);
+    color: var(--white);
+    text-align: center;
+    padding: 1.5rem 1rem 0.8rem 1rem;
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+
+.dev-credits {
+    margin-top: 1.2rem;
+    font-size: 0.72rem;
+    color: #8899a6;
+    border-top: 1px solid #2c3e50;
+    padding-top: 0.5rem;
 }
 </style>
 </head>
 <body>
 
 <header>
-<img src="logo-192.png" alt="Beduíno Artigos Evangélicos" class="banner-capa" onerror="this.src='https://via.placeholder.com/600x250?text=Beduino'">
-<div class="verse-box">
-"Conheçamos e prossigamos em conhecer ao SENHOR;" — Oséias 6:3
-</div>
+    <img src="logo-192.png" alt="Beduíno Artigos Evangélicos" class="banner-capa" onerror="this.src='https://via.placeholder.com/600x250?text=Beduino'">
+    <div class="verse-box">
+        "Conheçamos e prossigamos em conhecer ao SENHOR;" — Oséias 6:3
+    </div>
 </header>
 
 <main>
-  <!-- Botão para abrir o Crediário Próprio -->
-<button class="btn btn-crediario" onclick="abrirModalCrediario()" style="background-color: #d4af37; color: #1a2530; font-weight: bold; padding: 0.6rem 1.2rem; border: none; border-radius: 4px; cursor: pointer;">
-   CLIQUE AQUI e Pague no Carnê!  Crediário (Até 3x)
-</button>
+    <!-- Botão para abrir o Crediário Próprio -->
+    <div style="margin-bottom: 1.5rem; text-align: center;">
+        <button class="btn btn-crediario" onclick="abrirModalCrediario()" style="background-color: #d4af37; color: #1a2530; font-weight: bold; padding: 0.8rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; width: 100%; max-width: 400px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+           CLIQUE AQUI e Pague no Carnê! (Até 3x)
+        </button>
+    </div>
 
-<!-- Modal do Crediário -->
-<div id="modalCrediario" class="modal-overlay hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 1rem;">
-    <div class="modal-content" style="background: #ffffff; padding: 1.5rem; border-radius: 8px; width: 100%; max-width: 500px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto;">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem; margin-bottom: 1rem;">
-            <h3 style="color: #1a2530; font-size: 1.2rem;">Crediário Próprio - Beduíno</h3>
-            <button onclick="fecharModalCrediario()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; font-weight: bold; color: #c0392b;">&times;</button>
+    <!-- Modal do Crediário -->
+    <div id="modalCrediario" class="modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 1rem;">
+        <div class="modal-content" style="background: #ffffff; padding: 1.5rem; border-radius: 8px; width: 100%; max-width: 500px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                <h3 style="color: #1a2530; font-size: 1.2rem;">Crediário Próprio - Beduíno</h3>
+                <button onclick="fecharModalCrediario()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; font-weight: bold; color: #c0392b;">&times;</button>
+            </div>
+
+            <form id="formCrediario" onsubmit="gerarBoletoCrediario(event)">
+                <div style="margin-bottom: 0.8rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Nome Completo:*</label>
+                    <input type="text" id="credNome" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 0.8rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">CPF:*</label>
+                    <input type="text" id="credCpf" placeholder="000.000.000-00" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 0.8rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Endereço Completo:*</label>
+                    <input type="text" id="credEndereco" placeholder="Rua, Número, Bairro, Cidade - UF" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 0.8rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Valor Total da Compra (R$):*</label>
+                    <input type="number" id="credValor" step="0.01" min="10" placeholder="Ex: 90.00" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 1.2rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Quantidade de Parcelas (Máximo 3x):*</label>
+                    <select id="credParcelas" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: #fff;">
+                        <option value="1">1x (À vista)</option>
+                        <option value="2">2x (Parcelado)</option>
+                        <option value="3">3x (Parcelado)</option>
+                    </select>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 0.8rem; border-radius: 4px; font-size: 0.8rem; color: #555; margin-bottom: 1rem; border-left: 3px solid #d4af37;">
+                    <strong>Instruções de Pagamento:</strong> O pagamento de cada parcela deve ser feito via Pix para a chave <strong>gilinbrazil@gmail.com</strong> e o comprovante enviado no WhatsApp abaixo.
+                </div>
+
+                <button type="submit" style="width: 100%; background: #1a2530; color: #fff; padding: 0.7rem; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 0.95rem;">
+                    Gerar Carnê em PDF e Enviar Pedido
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Catálogo de Produtos -->
+    <section>
+        <h2>Catálogo</h2>
+        <div class="catalog-grid">
+            <a href="biblia.html" class="catalog-card">
+                <img src="img1.png" alt="Bíblias" onerror="this.src='https://via.placeholder.com/150?text=Bíblias'">
+                <span>Bíblias</span>
+            </a>
+            <a href="harpas.html" class="catalog-card">
+                <img src="img2.png" alt="Harpas" onerror="this.src='https://via.placeholder.com/150?text=Harpas'">
+                <span>Harpas</span>
+            </a>
+            <a href="gravatas.html" class="catalog-card">
+                <img src="img3.png" alt="Gravatas" onerror="this.src='https://via.placeholder.com/150?text=Gravatas'">
+                <span>Gravatas</span>
+            </a>
+            <a href="conjuntos.html" class="catalog-card">
+                <img src="img4.png" alt="Conjunto de Paletó e Calça" onerror="this.src='https://via.placeholder.com/150?text=Paleto+e+Calca'">
+                <span>Paletó e Calça</span>
+            </a>
+            <a href="sapatos&meias.html" class="catalog-card">
+                <img src="img5.png" alt="Sapatos - Meias" onerror="this.src='https://via.placeholder.com/150?text=Sapatos+e+Meias'">
+                <span>Sapatos e Meias</span>
+            </a>
+            <a href="pastas.html" class="catalog-card">
+                <img src="img6.png" alt="Pastas" onerror="this.src='https://via.placeholder.com/150?text=Pastas'">
+                <span>Pastas</span>
+            </a>
+            <a href="oleo-uncao.html" class="catalog-card">
+                <img src="img7.png" alt="Óleo de Unção" onerror="this.src='https://via.placeholder.com/150?text=Oleo+de+Uncao'">
+                <span>Óleo de Unção</span>
+            </a>
+            <a href="lencos.html" class="catalog-card">
+                <img src="img8.png" alt="Lenços" onerror="this.src='https://via.placeholder.com/150?text=Lencos'">
+                <span>Lenços</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Vitrine de Cursos AVANCE -->
+    <div class="avance-banner">
+        <h3>Vitrine Virtual de Cursos e Apps - AVANCE</h3>
+        <p>Conheça nossa grade de formação teológica e ferramentas digitais.</p>
+        <a href="https://escolateologicavance-debug.github.io/Cursos-Gerais-AVANCE-/" target="_blank" class="btn-avance">Acessar Cursos AVANCE</a>
+    </div>
+
+    <!-- Pagamento via PIX -->
+    <div class="pix-section">
+        <h3>Chave PIX para Pagamento</h3>
+        <p style="font-size: 0.85rem; color: #666;">Faça o Pix e envie o comprovante</p>
+        <div class="pix-key-box">
+            <code id="pixKey">gilinbrazil@gmail.com</code>
+            <button class="btn-copy" onclick="copyPix()">Copiar</button>
+        </div>
+    </div>
+
+    <!-- Seção Inferior: Vídeo, Ações Rápidas, E-mail e Feedback -->
+    <div class="bottom-section">
+
+        <!-- Vídeo do YouTube -->
+        <div class="video-container">
+            <h3>Conheça Nossos Produtos em Vídeo</h3>
+            <p style="font-size: 0.85rem; color: #555;">Assista à apresentação da nossa loja e produto no YouTube:</p>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/SEU_VIDEO_ID" title="Apresentação BEDUÍNO Artigos Evangélicos" allowfullscreen></iframe>
+            </div>
         </div>
 
-        <form id="formCrediario" onsubmit="gerarBoletoCrediario(event)">
-            <div style="margin-bottom: 0.8rem;">
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Nome Completo:*</label>
-                <input type="text" id="credNome" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
+        <!-- Ações Rápidas -->
+        <div class="quick-actions">
+            <button type="button" class="btn-action btn-pix-main" onclick="copyPix()">Copiar Chave Pix</button>
+            <button type="button" class="btn-action btn-faq" onclick="abrirFaq()">FAQ e Atendimento</button>
+            <a href="https://wa.me/5566984089634?text=Olá!%20Gostaria%20de%20falar%20com%20o%20atendimento%20da%20loja%20BEDUÍNO." target="_blank" class="btn-action btn-wsp">Conversar no WhatsApp</a>
+        </div>
 
-            <div style="margin-bottom: 0.8rem;">
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">CPF:*</label>
-                <input type="text" id="credCpf" placeholder="000.000.000-00" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
+        <!-- E-mail de Contacto -->
+        <div class="contact-box">
+            <strong>E-mail de Atendimento:</strong> <a href="mailto:gilinbrazil@gmail.com">gilinbrazil@gmail.com</a>
+        </div>
 
-            <div style="margin-bottom: 0.8rem;">
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Endereço Completo:*</label>
-                <input type="text" id="credEndereco" placeholder="Rua, Número, Bairro, Cidade - UF" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
+        <!-- Seção de Feedback -->
+        <div class="feedback-section">
+            <h3>Feedback da Sua Compra</h3>
+            <p style="font-size: 0.85rem; color: #555;">Deixe sua opinião ou dúvida sobre o seu pedido:</p>
+            <textarea id="indexFeedbackText" placeholder="Escreva seu feedback aqui..."></textarea>
+            <button type="button" class="btn-action btn-pix-main" style="margin-top: 0.6rem; width: 100%;" onclick="enviarFeedbackIndex()">Enviar Feedback via WhatsApp</button>
+        </div>
 
-            <div style="margin-bottom: 0.8rem;">
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Valor Total da Compra (R$):*</label>
-                <input type="number" id="credValor" step="0.01" min="10" placeholder="Ex: 90.00" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
+    </div>
 
-            <div style="margin-bottom: 1.2rem;">
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; color: #1a2530;">Quantidade de Parcelas (Máximo 3x):*</label>
-                <select id="credParcelas" required style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: #fff;">
-                    <option value="1">1x (À vista)</option>
-                    <option value="2">2x (Parcelado)</option>
-                    <option value="3">3x (Parcelado)</option>
-                </select>
-            </div>
+</main>
 
-            <div style="background: #f8f9fa; padding: 0.8rem; border-radius: 4px; font-size: 0.8rem; color: #555; margin-bottom: 1rem; border-left: 3px solid #d4af37;">
-                <strong>Instruções de Pagamento:</strong> O pagamento de cada parcela deve ser feito via Pix para a chave <strong>gilinbrazil@gmail.com</strong> e o comprovante enviado no WhatsApp abaixo.
-            </div>
+<!-- Modal do FAQ (Perguntas Frequentes) -->
+<div id="modalFaq" class="faq-modal-overlay">
+    <div class="faq-modal-content">
+        <button type="button" class="faq-close" onclick="fecharFaq()">&times;</button>
+        <h3 style="color: #1a2530; margin-bottom: 1rem; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem;">Perguntas Frequentes (FAQ)</h3>
 
-            <button type="submit" style="width: 100%; background: #1a2530; color: #fff; padding: 0.7rem; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 0.95rem;">
-                Gerar Carnê em PDF e Enviar Pedido
-            </button>
-        </form>
+        <div class="faq-item">
+            <h4>1. O frete é grátis?</h4>
+            <p><strong>Não.</strong> O valor do frete varia de acordo com o endereço de entrega e o peso da encomenda. A taxa de envio é calculada e informada diretamente pelo atendimento via WhatsApp ao finalizar o pedido.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>2. Quais são as formas de pagamento aceitas?</h4>
+            <p>Aceitamos pagamento à vista via Pix, transferências bancárias, cartões de crédito/débito e parcelamento exclusivo no Crediário Próprio (Carnê).</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>3. Como funciona a compra no Crediário Próprio (Carnê)?</h4>
+            <p>Escolha a opção de pagamento no carnê na página do produto ou no topo do site, preencha os seus dados completos no formulário e clique em gerar. O pedido será encaminhado para aprovação do nosso setor financeiro via WhatsApp.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>4. Como recebo a chave Pix para pagamento?</h4>
+            <p>Você pode copiar a chave Pix (gilinbrazil@gmail.com) diretamente no botão "Copiar Chave Pix" no site ou solicitar ao nosso setor financeiro no WhatsApp após confirmar a sua intenção de compra.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>5. Qual é o prazo de entrega dos produtos?</h4>
+            <p>O prazo depende da sua região e da modalidade de envio escolhida. Após a confirmação do pagamento ou aprovação do crediário, enviamos o código de rastreamento pelo WhatsApp.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>6. Posso escolher cores ou modelos específicos de roupas e acessórios?</h4>
+            <p>Sim! Para produtos com variação, o cliente pode alinhar a escolha exata de cores, tamanhos e modelos diretamente com a nossa equipa pelo WhatsApp.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>7. Como posso acompanhar o meu pedido?</h4>
+            <p>Assim que o seu produto for despachado, a nossa equipa envia-lhe o comprovativo de envio e o código de rastreio diretamente no seu WhatsApp ou e-mail.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>8. Os produtos possuem garantia?</h4>
+            <p>Sim, todos os nossos artigos evangélicos passam por inspeção de qualidade antes do envio e possuem garantia contra defeitos de fabricação.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>9. Posso trocar um produto se o tamanho não servir?</h4>
+            <p>Sim! Realizamos trocas de tamanhos. Basta entrar em contacto connosco pelo WhatsApp dentro do prazo de 7 dias após o recebimento.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>10. Onde fica localizada a loja e como entrar em contacto?</h4>
+            <p>Atendemos clientes em todo o Brasil. Você pode contactar-nos via WhatsApp (66 98408-9634) ou pelo e-mail gilinbrazil@gmail.com.</p>
+        </div>
     </div>
 </div>
 
-<!-- Importação da biblioteca jsPDF para gerar o PDF no navegador -->
+<footer>
+    <p>&copy; 2026 Beduíno Artigos Evangélicos. Todos os direitos reservados.</p>
+    <div class="dev-credits">
+        Desenvolvido por Gilberto Moreira (escolateologicavance@gmail.com) - MT/BR
+    </div>
+</footer>
+
+<!-- Importação da biblioteca jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+<!-- Scripts Gerais -->
 <script>
+    function copyPix() {
+        const pixText = document.getElementById("pixKey").innerText;
+        navigator.clipboard.writeText(pixText).then(() => {
+            alert("Chave PIX copiada com sucesso!");
+        }).catch(err => {
+            console.error("Erro ao copiar chave pix: ", err);
+        });
+    }
+
     function abrirModalCrediario() {
         document.getElementById('modalCrediario').style.display = 'flex';
     }
 
     function fecharModalCrediario() {
         document.getElementById('modalCrediario').style.display = 'none';
+    }
+
+    function abrirFaq() {
+        document.getElementById('modalFaq').style.display = 'flex';
+    }
+
+    function fecharFaq() {
+        document.getElementById('modalFaq').style.display = 'none';
+    }
+
+    function enviarFeedbackIndex() {
+        var texto = document.getElementById('indexFeedbackText').value.trim();
+        if(!texto) {
+            alert('Por favor, digite seu feedback antes de enviar.');
+            return;
+        }
+        var msg = encodeURIComponent("Olá! Feedback geral do site Beduíno Artigos Evangélicos: " + texto);
+        window.open("https://wa.me/5566984089634?text=" + msg, '_blank');
     }
 
     function gerarBoletoCrediario(event) {
@@ -303,11 +674,9 @@ margin-top: auto;
 
         const valorParcela = (valorTotal / qtdParcelas).toFixed(2);
 
-        // Inicializa o jsPDF
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Cabeçalho da Empresa no PDF
         doc.setFont("helvetica", "bold");
         doc.setFontSize(14);
         doc.setTextColor(26, 37, 48);
@@ -316,12 +685,11 @@ margin-top: auto;
         doc.setFontSize(9);
         doc.setFont("helvetica", "normal");
         doc.text("Rua Leonina Proença Ribeiro, 86 - Centro - Itanhangá-MT", 105, 21, { align: "center" });
-        doc.text("E-mail: escolateologicavance@gmail.com | WhatsApp: (66) 98466-6186", 105, 26, { align: "center" });
+        doc.text("E-mail: gilinbrazil@gmail.com | WhatsApp: (66) 98408-9634", 105, 26, { align: "center" });
         
         doc.setLineWidth(0.5);
         doc.line(15, 30, 195, 30);
 
-        // Dados do Cliente
         doc.setFont("helvetica", "bold");
         doc.text("COMPROVANTE DE CREDIÁRIO PRÓPRIO", 15, 38);
         
@@ -334,7 +702,6 @@ margin-top: auto;
 
         doc.line(15, 70, 195, 70);
 
-        // Geração das Parcelas no PDF
         let posY = 80;
         let hoje = new Date();
 
@@ -358,15 +725,12 @@ margin-top: auto;
             posY += 30;
         }
 
-        // Rodapé do PDF
         doc.setFontSize(8);
         doc.setTextColor(100, 100, 100);
         doc.text("Guarde este carnê e envie o comprovante de pagamento via WhatsApp.", 105, 285, { align: "center" });
 
-        // Salvar o arquivo PDF automaticamente para o cliente
         doc.save(`Carne_Credito_${nome.replace(/\s+/g, '_')}.pdf`);
 
-        // Mensagem para enviar para o seu WhatsApp com os dados do crediário
         let mensagemWhats = `*NOVO PEDIDO VIA CREDIÁRIO PRÓPRIO*%0A%0A` +
                             `*Cliente:* ${nome}%0A` +
                             `*CPF:* ${cpf}%0A` +
@@ -375,437 +739,21 @@ margin-top: auto;
                             `*Parcelamento:* ${qtdParcelas}x de R$ ${valorParcela}%0A%0A` +
                             `O cliente gerou o carnê e aguarda aprovação!`;
 
-        const numeroWhatsApp = "5566984666186";
+        const numeroWhatsApp = "5566984089634";
         const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemWhats}`;
 
         fecharModalCrediario();
-        
-        // Abre o WhatsApp para você receber o comprovante e os dados do cliente
         window.open(urlWhatsApp, '_blank');
         alert("Carnê gerado em PDF com sucesso! O WhatsApp foi aberto para você receber a notificação do pedido.");
     }
-</script>
-<!-- Catálogo de Produtos -->
-<section>
-<h2>Catálogo</h2>
-<div class="catalog-grid">
-<a href="biblia.html" class="catalog-card">
-<img src="img1.png" alt="Bíblias" onerror="this.src='https://via.placeholder.com/150?text=Bíblias'">
-<span>Bíblias</span>
-</a>
-<a href="harpas.html" class="catalog-card">
-<img src="img2.png" alt="Harpas" onerror="this.src='https://via.placeholder.com/150?text=Harpas'">
-<span>Harpas</span>
-</a>
-<a href="gravatas.html" class="catalog-card">
-<img src="img3.png" alt="Gravatas" onerror="this.src='https://via.placeholder.com/150?text=Gravatas'">
-<span>Gravatas</span>
-</a>
-<a href="conjuntos.html" class="catalog-card">
-<img src="img4.png" alt="Conjunto de Paletó e Calça" onerror="this.src='https://via.placeholder.com/150?text=Paleto+e+Calca'">
-<span>Paletó e Calça</span>
-</a>
-<a href="sapatos&meias.html" class="catalog-card">
-<img src="img5.png" alt="Sapatos - Meias" onerror="this.src='https://via.placeholder.com/150?text=Sapatos+e+Meias'">
-<span>Sapatos e Meias</span>
-</a>
-<a href="pastas.html" class="catalog-card">
-<img src="img6.png" alt="Sapatos" onerror="this.src='https://via.placeholder.com/150?text=Sapatos'">
-<span>Pastas</span>
-</a>
-<a href="oleo-uncao.html" class="catalog-card">
-<img src="img7.png" alt="Óleo de Unção" onerror="this.src='https://via.placeholder.com/150?text=Oleo+de+Uncao'">
-<span>Óleo de Unção</span>
-</a>
-<a href="lencos.html" class="catalog-card">
-<img src="img8.png" alt="Lenços" onerror="this.src='https://via.placeholder.com/150?text=Lencos'">
-<span>Lenços</span>
-</a>
-</div>
-</section>
 
-<!-- Vitrine de Cursos AVANCE -->
-<div class="avance-banner">
-<h3>Vitrine Virtual de Cursos e Apps - AVANCE</h3>
-<p>Conheça nossa grade de formação teológica e ferramentas digitais.</p>
-<a href="https://escolateologicavance-debug.github.io/Cursos-Gerais-AVANCE-/" target="_blank" class="btn-avance">Acessar Cursos AVANCE</a>
-</div>
-
-<!-- Pagamento via PIX -->
-<div class="pix-section">
-<h3>Chave PIX para Pagamento</h3>
-<p style="font-size: 0.85rem; color: #666;">Faça o Pix e envie o comprovante</p>
-<div class="pix-key-box">
-<code id="pixKey">gilinbrazil@gmail.com</code>
-<button class="btn-copy" onclick="copyPix()">Copiar</button>
-</div>
-</div>
-</main>
-
-<footer>
-<p>© 2026 Beduíno Artigos Evangélicos. Todos os direitos reservados.</p>
-</footer>
-
-<!-- Script de Copiar PIX e Registro do Service Worker -->
-<script>
-function copyPix() {
-const pixText = document.getElementById("pixKey").innerText;
-navigator.clipboard.writeText(pixText).then(() => {
-alert("Chave PIX copiada com sucesso!");
-}).catch(err => {
-console.error("Erro ao copiar chave pix: ", err);
-});
-}
-
-if ('serviceWorker' in navigator) {
-window.addEventListener('load', () => {
-navigator.serviceWorker.register('sw.js')
-.then(reg => console.log('Service Worker registrado com sucesso!', reg))
-.catch(err => console.log('Erro ao registrar Service Worker:', err));
-});
-}
-  
-<!-- ================= SECÇÃO INFERIOR E RODAPÉ ================= -->
-<style>
-    .bottom-section {
-        max-width: 900px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-    }
-
-    .video-container {
-        background: #ffffff;
-        padding: 1.2rem;
-        border-radius: 8px;
-        border: 1px solid #e0e0e0;
-        margin-bottom: 1.5rem;
-        text-align: center;
-    }
-
-    .video-container h3 {
-        color: #1a2530;
-        margin-bottom: 0.5rem;
-    }
-
-    .video-wrapper {
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
-        height: 0;
-        overflow: hidden;
-        border-radius: 8px;
-        margin-top: 0.8rem;
-    }
-
-    .video-wrapper iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
-
-    .quick-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 0.8rem;
-        margin-bottom: 1.5rem;
-    }
-
-    @media(min-width: 600px) {
-        .quick-actions {
-            flex-direction: row;
-        }
-    }
-
-    .btn-action {
-        flex: 1;
-        padding: 0.85rem 1rem;
-        border-radius: 6px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        cursor: pointer;
-        border: none;
-        font-size: 0.95rem;
-        display: block;
-    }
-
-    .btn-pix-main {
-        background-color: #1a2530;
-        color: #ffffff;
-    }
-
-    .btn-faq {
-        background-color: #d4af37;
-        color: #1a2530;
-    }
-
-    .btn-wsp {
-        background-color: #25d366;
-        color: #ffffff;
-    }
-
-    .contact-box {
-        background: #ffffff;
-        padding: 1rem;
-        border-radius: 8px;
-        border: 1px solid #e0e0e0;
-        margin-bottom: 1.5rem;
-        text-align: center;
-        font-size: 0.9rem;
-    }
-
-    .contact-box a {
-        color: #1a2530;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
-    /* Modal FAQ */
-    .faq-modal-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.75);
-        z-index: 999999;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-    }
-
-    .faq-modal-content {
-        background: #ffffff;
-        border-radius: 10px;
-        max-width: 600px;
-        width: 100%;
-        padding: 1.5rem;
-        position: relative;
-        max-height: 85vh;
-        overflow-y: auto;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.4);
-    }
-
-    .faq-close {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        font-size: 1.8rem;
-        cursor: pointer;
-        border: none;
-        background: none;
-        color: #666;
-    }
-
-    .faq-item {
-        margin-bottom: 1rem;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 0.8rem;
-        text-align: left;
-    }
-
-    .faq-item h4 {
-        color: #1a2530;
-        font-size: 0.95rem;
-        margin-bottom: 0.3rem;
-    }
-
-    .faq-item p {
-        color: #555;
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-
-    .feedback-section {
-        background: #ffffff;
-        padding: 1.2rem;
-        border-radius: 8px;
-        border: 1px solid #e0e0e0;
-        margin-bottom: 2rem;
-    }
-
-    .feedback-section h3 {
-        color: #1a2530;
-        margin-bottom: 0.3rem;
-    }
-
-    .feedback-section textarea {
-        width: 100%;
-        height: 80px;
-        padding: 0.6rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-top: 0.6rem;
-        resize: vertical;
-        font-family: inherit;
-    }
-
-    footer {
-        background-color: #1a2530;
-        color: #ffffff;
-        text-align: center;
-        padding: 1.5rem 1rem 0.8rem 1rem;
-        font-size: 0.85rem;
-        margin-top: auto;
-    }
-
-    .dev-credits {
-        margin-top: 1.2rem;
-        font-size: 0.72rem;
-        color: #8899a6;
-        border-top: 1px solid #2c3e50;
-        padding-top: 0.5rem;
-    }
-</style>
-
-<div class="bottom-section">
-
-    <!-- Vídeo do YouTube -->
-    <div class="video-container">
-        <h3>Conheça Nossos Produtos em Vídeo</h3>
-        <p style="font-size: 0.85rem; color: #555;">Assista à apresentação da nossa loja e produtos no YouTube:</p>
-        <div class="video-wrapper">
-            <!-- Substitua 'SEU_VIDEO_ID' pelo ID do vídeo do YouTube -->
-            <iframe src="https://www.youtube.com/embed/SEU_VIDEO_ID" title="Apresentação BEDUÍNO Artigos Evangélicos" allowfullscreen></iframe>
-        </div>
-    </div>
-
-    <!-- Ações Rápidas -->
-    <div class="quick-actions">
-        <button type="button" class="btn-action btn-pix-main" onclick="copiarPixIndex()">Copiar Chave Pix</button>
-        <button type="button" class="btn-action btn-faq" onclick="abrirFaq()">FAQ e Atendimento</button>
-        <a href="https://wa.me/5566984089634?text=Olá!%20Gostaria%20de%20falar%20com%20o%20atendimento%20da%20loja%20BEDUÍNO." target="_blank" class="btn-action btn-wsp">Conversar no WhatsApp</a>
-    </div>
-
-    <!-- E-mail de Contacto -->
-    <div class="contact-box">
-        <strong>E-mail de Atendimento:</strong> <a href="mailto:gilinbrazil@gmail.com">gilinbrazil@gmail.com</a>
-    </div>
-
-    <!-- Secção de Feedback -->
-    <div class="feedback-section">
-        <h3>Feedback da Sua Compra</h3>
-        <p style="font-size: 0.85rem; color: #555;">Deixe sua opinião ou dúvida sobre o seu pedido:</p>
-        <textarea id="indexFeedbackText" placeholder="Escreva seu feedback aqui..."></textarea>
-        <button type="button" class="btn-action btn-pix-main" style="margin-top: 0.6rem; width: 100%;" onclick="enviarFeedbackIndex()">Enviar Feedback via WhatsApp</button>
-    </div>
-
-</div>
-
-<!-- Modal do FAQ (Perguntas Frequentes) -->
-<div id="modalFaq" class="faq-modal-overlay">
-    <div class="faq-modal-content">
-        <button type="button" class="faq-close" onclick="fecharFaq()">&times;</button>
-        <h3 style="color: #1a2530; margin-bottom: 1rem; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem;">Perguntas Frequentes (FAQ)</h3>
-
-        <div class="faq-item">
-            <h4>1. O frete é grátis?</h4>
-            <p><strong>Não.</strong> O valor do frete varia de acordo com o endereço de entrega e o peso da encomenda. A taxa de envio é calculada e informada diretamente pelo atendimento via WhatsApp ao finalizar o pedido.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>2. Quais são as formas de pagamento aceites?</h4>
-            <p>Aceitamos pagamento à vista via Pix, transferências bancárias, cartões de crédito/débito e parcelamento exclusivo no Crediário Próprio (Carnê).</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>3. Como funciona a compra no Crediário Próprio (Carnê)?</h4>
-            <p>Escolha a opção de pagamento no carnê na página do produto, preencha os seus dados completos no formulário e clique em gerar. O pedido será encaminhado para aprovação do nosso setor financeiro via WhatsApp.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>4. Como recebo a chave Pix para pagamento?</h4>
-            <p>Você pode copiar a chave Pix diretamente no botão "Copiar Chave Pix" no site ou solicitar ao nosso setor financeiro no WhatsApp após confirmar a sua intenção de compra.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>5. Qual é o prazo de entrega dos produtos?</h4>
-            <p>O prazo depende da sua região e da modalidade de envio escolhida. Após a confirmação do pagamento ou aprovação do crediário, enviamos o código de rastreamento pelo WhatsApp.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>6. Posso escolher cores ou modelos específicos de roupas e bolsas?</h4>
-            <p>Sim! Para produtos com variação (como saias, ternos e bolsas), o cliente pode alinhar a escolha exata de cores, modelos e tecidos diretamente com a nossa equipa pelo WhatsApp.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>7. Como posso acompanhar o meu pedido?</h4>
-            <p>Assim que o seu produto for despachado, a nossa equipa envia-lhe o comprovativo de envio e o código de rastreio diretamente no seu WhatsApp ou e-mail.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>8. Os produtos possuem garantia?</h4>
-            <p>Sim, todos os nossos artigos evangélicos passam por inspeção de qualidade antes do envio e possuem garantia contra defeitos de fabricação.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>9. Posso trocar um produto se o tamanho não servir?</h4>
-            <p>Sim! Realizamos trocas de tamanhos (como saias ou ternos). Basta entrar em contacto connosco pelo WhatsApp dentro do prazo de 7 dias após o recebimento.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>10. Onde fica localizada a loja e como entrar em contacto?</h4>
-            <p>Atendemos clientes em todo o Brasil. Você pode contactar-nos via WhatsApp (66 98408-9634) ou pelo e-mail gilinbrazil@gmail.com.</p>
-        </div>
-    </div>
-</div>
-
-<!-- Rodapé Final -->
-<footer>
-    <p>&copy; 2026 BEDUÍNO Artigos Evangélicos. Todos os direitos reservados.</p>
-    <div class="dev-credits">
-        Desenvolvido por Gilberto Moreira (escolateologicavance@gmail.com) - MT/BR
-    </div>
-</footer>
-
-<script>
-    var chavePixGlobal = "00020101021126580014BR.GOV.BCB.PIX01360aa3ebd1-a374-4441-8310-2a89026fbe025204000053039865802BR5925Anderson Rogerio Silva As6009SAO PAULO62080504daqr63046B7E";
-
-    function abrirFaq() {
-        document.getElementById('modalFaq').style.display = 'flex';
-    }
-
-    function fecharFaq() {
-        document.getElementById('modalFaq').style.display = 'none';
-    }
-
-    function copiarPixIndex() {
-        var input = document.createElement("textarea");
-        input.value = chavePixGlobal;
-        input.style.position = "fixed";
-        input.style.left = "-9999px";
-        document.body.appendChild(input);
-        input.focus();
-        input.select();
-        
-        var sucesso = false;
-        try {
-            sucesso = document.execCommand("copy");
-        } catch(e) {
-            sucesso = false;
-        }
-        document.body.removeChild(input);
-
-        if (sucesso) {
-            alert("Chave Pix copiada com sucesso!\n\nCole no aplicativo do seu banco para realizar o pagamento.");
-        } else {
-            prompt("Copie a Chave Pix abaixo e cole no aplicativo do seu banco:", chavePixGlobal);
-        }
-    }
-
-    function enviarFeedbackIndex() {
-        var texto = document.getElementById('indexFeedbackText').value.trim();
-        if(!texto) {
-            alert('Por favor, digite seu feedback antes de enviar.');
-            return;
-        }
-        var msg = encodeURIComponent("Olá! Feedback geral do site BEDUÍNO Artigos Evangélicos: " + texto);
-        window.open("https://wa.me/5566984089634?text=" + msg, '_blank');
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker registrado com sucesso!', reg))
+            .catch(err => console.log('Erro ao registrar Service Worker:', err));
+        });
     }
 </script>
-
 </body>
 </html>
