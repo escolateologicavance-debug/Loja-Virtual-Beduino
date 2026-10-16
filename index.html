@@ -464,6 +464,348 @@ navigator.serviceWorker.register('sw.js')
 .catch(err => console.log('Erro ao registrar Service Worker:', err));
 });
 }
+  
+<!-- ================= SECÇÃO INFERIOR E RODAPÉ ================= -->
+<style>
+    .bottom-section {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .video-container {
+        background: #ffffff;
+        padding: 1.2rem;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .video-container h3 {
+        color: #1a2530;
+        margin-bottom: 0.5rem;
+    }
+
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        margin-top: 0.8rem;
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .quick-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    @media(min-width: 600px) {
+        .quick-actions {
+            flex-direction: row;
+        }
+    }
+
+    .btn-action {
+        flex: 1;
+        padding: 0.85rem 1rem;
+        border-radius: 6px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        font-size: 0.95rem;
+        display: block;
+    }
+
+    .btn-pix-main {
+        background-color: #1a2530;
+        color: #ffffff;
+    }
+
+    .btn-faq {
+        background-color: #d4af37;
+        color: #1a2530;
+    }
+
+    .btn-wsp {
+        background-color: #25d366;
+        color: #ffffff;
+    }
+
+    .contact-box {
+        background: #ffffff;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .contact-box a {
+        color: #1a2530;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    /* Modal FAQ */
+    .faq-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.75);
+        z-index: 999999;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .faq-modal-content {
+        background: #ffffff;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 100%;
+        padding: 1.5rem;
+        position: relative;
+        max-height: 85vh;
+        overflow-y: auto;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    }
+
+    .faq-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 1.8rem;
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: #666;
+    }
+
+    .faq-item {
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.8rem;
+        text-align: left;
+    }
+
+    .faq-item h4 {
+        color: #1a2530;
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .faq-item p {
+        color: #555;
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .feedback-section {
+        background: #ffffff;
+        padding: 1.2rem;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 2rem;
+    }
+
+    .feedback-section h3 {
+        color: #1a2530;
+        margin-bottom: 0.3rem;
+    }
+
+    .feedback-section textarea {
+        width: 100%;
+        height: 80px;
+        padding: 0.6rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 0.6rem;
+        resize: vertical;
+        font-family: inherit;
+    }
+
+    footer {
+        background-color: #1a2530;
+        color: #ffffff;
+        text-align: center;
+        padding: 1.5rem 1rem 0.8rem 1rem;
+        font-size: 0.85rem;
+        margin-top: auto;
+    }
+
+    .dev-credits {
+        margin-top: 1.2rem;
+        font-size: 0.72rem;
+        color: #8899a6;
+        border-top: 1px solid #2c3e50;
+        padding-top: 0.5rem;
+    }
+</style>
+
+<div class="bottom-section">
+
+    <!-- Vídeo do YouTube -->
+    <div class="video-container">
+        <h3>Conheça Nossos Produtos em Vídeo</h3>
+        <p style="font-size: 0.85rem; color: #555;">Assista à apresentação da nossa loja e produtos no YouTube:</p>
+        <div class="video-wrapper">
+            <!-- Substitua 'SEU_VIDEO_ID' pelo ID do vídeo do YouTube -->
+            <iframe src="https://www.youtube.com/embed/SEU_VIDEO_ID" title="Apresentação BEDUÍNO Artigos Evangélicos" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Ações Rápidas -->
+    <div class="quick-actions">
+        <button type="button" class="btn-action btn-pix-main" onclick="copiarPixIndex()">Copiar Chave Pix</button>
+        <button type="button" class="btn-action btn-faq" onclick="abrirFaq()">FAQ e Atendimento</button>
+        <a href="https://wa.me/5566984089634?text=Olá!%20Gostaria%20de%20falar%20com%20o%20atendimento%20da%20loja%20BEDUÍNO." target="_blank" class="btn-action btn-wsp">Conversar no WhatsApp</a>
+    </div>
+
+    <!-- E-mail de Contacto -->
+    <div class="contact-box">
+        <strong>E-mail de Atendimento:</strong> <a href="mailto:gilinbrazil@gmail.com">gilinbrazil@gmail.com</a>
+    </div>
+
+    <!-- Secção de Feedback -->
+    <div class="feedback-section">
+        <h3>Feedback da Sua Compra</h3>
+        <p style="font-size: 0.85rem; color: #555;">Deixe sua opinião ou dúvida sobre o seu pedido:</p>
+        <textarea id="indexFeedbackText" placeholder="Escreva seu feedback aqui..."></textarea>
+        <button type="button" class="btn-action btn-pix-main" style="margin-top: 0.6rem; width: 100%;" onclick="enviarFeedbackIndex()">Enviar Feedback via WhatsApp</button>
+    </div>
+
+</div>
+
+<!-- Modal do FAQ (Perguntas Frequentes) -->
+<div id="modalFaq" class="faq-modal-overlay">
+    <div class="faq-modal-content">
+        <button type="button" class="faq-close" onclick="fecharFaq()">&times;</button>
+        <h3 style="color: #1a2530; margin-bottom: 1rem; border-bottom: 2px solid #d4af37; padding-bottom: 0.5rem;">Perguntas Frequentes (FAQ)</h3>
+
+        <div class="faq-item">
+            <h4>1. O frete é grátis?</h4>
+            <p><strong>Não.</strong> O valor do frete varia de acordo com o endereço de entrega e o peso da encomenda. A taxa de envio é calculada e informada diretamente pelo atendimento via WhatsApp ao finalizar o pedido.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>2. Quais são as formas de pagamento aceites?</h4>
+            <p>Aceitamos pagamento à vista via Pix, transferências bancárias, cartões de crédito/débito e parcelamento exclusivo no Crediário Próprio (Carnê).</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>3. Como funciona a compra no Crediário Próprio (Carnê)?</h4>
+            <p>Escolha a opção de pagamento no carnê na página do produto, preencha os seus dados completos no formulário e clique em gerar. O pedido será encaminhado para aprovação do nosso setor financeiro via WhatsApp.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>4. Como recebo a chave Pix para pagamento?</h4>
+            <p>Você pode copiar a chave Pix diretamente no botão "Copiar Chave Pix" no site ou solicitar ao nosso setor financeiro no WhatsApp após confirmar a sua intenção de compra.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>5. Qual é o prazo de entrega dos produtos?</h4>
+            <p>O prazo depende da sua região e da modalidade de envio escolhida. Após a confirmação do pagamento ou aprovação do crediário, enviamos o código de rastreamento pelo WhatsApp.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>6. Posso escolher cores ou modelos específicos de roupas e bolsas?</h4>
+            <p>Sim! Para produtos com variação (como saias, ternos e bolsas), o cliente pode alinhar a escolha exata de cores, modelos e tecidos diretamente com a nossa equipa pelo WhatsApp.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>7. Como posso acompanhar o meu pedido?</h4>
+            <p>Assim que o seu produto for despachado, a nossa equipa envia-lhe o comprovativo de envio e o código de rastreio diretamente no seu WhatsApp ou e-mail.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>8. Os produtos possuem garantia?</h4>
+            <p>Sim, todos os nossos artigos evangélicos passam por inspeção de qualidade antes do envio e possuem garantia contra defeitos de fabricação.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>9. Posso trocar um produto se o tamanho não servir?</h4>
+            <p>Sim! Realizamos trocas de tamanhos (como saias ou ternos). Basta entrar em contacto connosco pelo WhatsApp dentro do prazo de 7 dias após o recebimento.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>10. Onde fica localizada a loja e como entrar em contacto?</h4>
+            <p>Atendemos clientes em todo o Brasil. Você pode contactar-nos via WhatsApp (66 98408-9634) ou pelo e-mail gilinbrazil@gmail.com.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Rodapé Final -->
+<footer>
+    <p>&copy; 2026 BEDUÍNO Artigos Evangélicos. Todos os direitos reservados.</p>
+    <div class="dev-credits">
+        Desenvolvido por Gilberto Moreira (escolateologicavance@gmail.com) - MT/BR
+    </div>
+</footer>
+
+<script>
+    var chavePixGlobal = "00020101021126580014BR.GOV.BCB.PIX01360aa3ebd1-a374-4441-8310-2a89026fbe025204000053039865802BR5925Anderson Rogerio Silva As6009SAO PAULO62080504daqr63046B7E";
+
+    function abrirFaq() {
+        document.getElementById('modalFaq').style.display = 'flex';
+    }
+
+    function fecharFaq() {
+        document.getElementById('modalFaq').style.display = 'none';
+    }
+
+    function copiarPixIndex() {
+        var input = document.createElement("textarea");
+        input.value = chavePixGlobal;
+        input.style.position = "fixed";
+        input.style.left = "-9999px";
+        document.body.appendChild(input);
+        input.focus();
+        input.select();
+        
+        var sucesso = false;
+        try {
+            sucesso = document.execCommand("copy");
+        } catch(e) {
+            sucesso = false;
+        }
+        document.body.removeChild(input);
+
+        if (sucesso) {
+            alert("Chave Pix copiada com sucesso!\n\nCole no aplicativo do seu banco para realizar o pagamento.");
+        } else {
+            prompt("Copie a Chave Pix abaixo e cole no aplicativo do seu banco:", chavePixGlobal);
+        }
+    }
+
+    function enviarFeedbackIndex() {
+        var texto = document.getElementById('indexFeedbackText').value.trim();
+        if(!texto) {
+            alert('Por favor, digite seu feedback antes de enviar.');
+            return;
+        }
+        var msg = encodeURIComponent("Olá! Feedback geral do site BEDUÍNO Artigos Evangélicos: " + texto);
+        window.open("https://wa.me/5566984089634?text=" + msg, '_blank');
+    }
 </script>
+
 </body>
 </html>
