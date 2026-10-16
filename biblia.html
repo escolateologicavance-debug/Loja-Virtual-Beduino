@@ -269,6 +269,85 @@
             font-size: 0.95rem;
         }
 
+        /* Estilização do Consultador de Frete */
+        .frete-container {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .frete-container h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .frete-subtitulo {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .frete-input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .frete-input-group input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .frete-input-group button {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            padding: 10px 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .frete-resultado {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .frete-resultado.gratis {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .frete-resultado.pago {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        .frete-opcao {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #cbd5e1;
+        }
+
+        .hidden {
+            display: none;
+        }
+
         /* Seção de Contato WhatsApp Geral */
         .contact-box {
             background: var(--white);
@@ -463,6 +542,23 @@
             </div>
         </div>
 
+        <!-- Consultador de Frete por CEP -->
+        <div class="frete-container">
+            <h3>Consultar Frete por CEP</h3>
+            <p class="frete-subtitulo">
+                Informe seu CEP para calcular o envio <br>
+                <strong>(Itanhangá-MT tem Entrega Grátis!)</strong>
+            </p>
+
+            <div class="frete-input-group">
+                <input type="text" id="cepDestino" placeholder="00000-000" maxlength="9" />
+                <button type="button" id="btnConsultarFrete" onclick="calcularFrete()">Consultar</button>
+            </div>
+
+            <!-- Área de exibição do resultado instantâneo -->
+            <div id="freteResultado" class="frete-resultado hidden"></div>
+        </div>
+
         <!-- Bloco de atendimento / WhatsApp geral -->
         <div class="contact-box">
             <h3>Pedidos e Formas de Pagamento</h3>
@@ -550,175 +646,71 @@
             const mensagem = encodeURIComponent(`Olá! Não encontrei no catálogo padrão e gostaria de procurar por: ${termo}`);
             window.open(`https://wa.me/5566984666186?text=${mensagem}`, '_blank');
         }
-        <!-- Estrutura do Consultador de Frete -->
-<div class="frete-container">
-  <h3>Consultar Frete por CEP</h3>
-  <p class="frete-subtitulo">
-    Informe seu CEP para calcular o envio <br>
-    <strong>(Itanhangá-MT tem Entrega Grátis!)</strong>
-  </p>
 
-  <div class="frete-input-group">
-    <input type="text" id="cepDestino" placeholder="00000-000" maxlength="9" />
-    <button type="button" id="btnConsultarFrete" onclick="calcularFrete()">Consultar</button>
-  </div>
+        // --- Funções de Cálculo de Frete Instantâneo ---
+        const PESO_PRODUTO_KG = 0.5; // Peso médio base das Bíblias
+        const CEP_ORIGEM = "78578000"; // CEP de Itanhangá-MT
 
-  <!-- Área de exibição do resultado instantâneo -->
-  <div id="freteResultado" class="frete-resultado hidden"></div>
-</div>
+        async function calcularFrete() {
+            const inputCep = document.getElementById("cepDestino");
+            const resultadoDiv = document.getElementById("freteResultado");
+            const cepLimpo = inputCep.value.replace(/\D/g, '');
 
-<style>
-/* Estilização seguindo o padrão visual da sua interface */
-.frete-container {
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
-  background-color: #ffffff;
-  max-width: 400px;
-  font-family: sans-serif;
-}
+            if (cepLimpo.length !== 8) {
+                alert("Por favor, digite um CEP válido com 8 dígitos.");
+                return;
+            }
 
-.frete-container h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  color: #1e293b;
-  font-size: 1.1rem;
-}
+            resultadoDiv.className = "frete-resultado pago";
+            resultadoDiv.innerHTML = "⏳ Consultando frete...";
 
-.frete-subtitulo {
-  font-size: 0.875rem;
-  color: #64748b;
-  margin-bottom: 15px;
-}
+            try {
+                // 1. Busca localidade pelo CEP via ViaCEP para validação
+                const viaCepResponse = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+                const dadosCep = await viaCepResponse.json();
 
-.frete-input-group {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 15px;
-}
+                if (dadosCep.erro) {
+                    resultadoDiv.innerHTML = "❌ CEP não encontrado. Verifique os números digitados.";
+                    return;
+                }
 
-.frete-input-group input {
-  flex: 1;
-  padding: 10px 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 1rem;
-  outline: none;
-}
+                // 2. Regra para Entrega Grátis Local (Itanhangá - MT)
+                if (dadosCep.localidade.toLowerCase() === "itanhangá" || cepLimpo === "78578000") {
+                    resultadoDiv.className = "frete-resultado gratis";
+                    resultadoDiv.innerHTML = `
+                        📍 <strong>Localidade:</strong> ${dadosCep.localidade} - ${dadosCep.uf}<br>
+                        🎉 <strong>Frete Grátis</strong> para a sua região!
+                    `;
+                    return;
+                }
 
-.frete-input-group button {
-  background-color: #2d3748;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 18px;
-  font-weight: bold;
-  cursor: pointer;
-}
+                // 3. Consulta de Frete Instantâneo (Simulador de Correios / PAC e Sedex)
+                const freteCalculado = await simularCalculoCorreios(cepLimpo, PESO_PRODUTO_KG);
 
-.frete-resultado {
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-}
+                resultadoDiv.innerHTML = `
+                    📍 <strong>Localidade:</strong> ${dadosCep.localidade} - ${dadosCep.uf}
+                    <div class="frete-opcao">
+                        <span>📦 <strong>PAC:</strong> R$ ${freteCalculado.pac.valor}</span>
+                        <span>(${freteCalculado.pac.prazo} dias úteis)</span>
+                    </div>
+                    <div class="frete-opcao">
+                        <span>⚡ <strong>SEDEX:</strong> R$ ${freteCalculado.sedex.valor}</span>
+                        <span>(${freteCalculado.sedex.prazo} dias úteis)</span>
+                    </div>
+                `;
 
-.frete-resultado.gratis {
-  background-color: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  color: #166534;
-}
+            } catch (error) {
+                resultadoDiv.innerHTML = "⚠️ Não foi possível obter o valor do frete automaticamente. <br>Consulte via WhatsApp.";
+            }
+        }
 
-.frete-resultado.pago {
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
-  color: #334155;
-}
-
-.frete-opcao {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 6px;
-  padding-top: 6px;
-  border-top: 1px dashed #cbd5e1;
-}
-
-.hidden {
-  display: none;
-}
-</style>
-
-<script>
-// Dados do Produto e Origem (Ajuste conforme necessário)
-const PESO_PRODUTO_KG = 0.5; // Ex: Peso da Harpa Pentecostal em kg
-const CEP_ORIGEM = "78578000"; // Seu CEP de envio
-
-async function calcularFrete() {
-  const inputCep = document.getElementById("cepDestino");
-  const resultadoDiv = document.getElementById("freteResultado");
-  const cepLimpo = inputCep.value.replace(/\D/g, '');
-
-  if (cepLimpo.length !== 8) {
-    alert("Por favor, digite um CEP válido com 8 dígitos.");
-    return;
-  }
-
-  resultadoDiv.className = "frete-resultado pago";
-  resultadoDiv.innerHTML = "⏳ Consultando frete...";
-
-  try {
-    // 1. Busca localidade pelo CEP via ViaCEP para validação e exibição do local
-    const viaCepResponse = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
-    const dadosCep = await viaCepResponse.json();
-
-    if (dadosCep.erro) {
-      resultadoDiv.innerHTML = "❌ CEP não encontrado. Verifique os números digitados.";
-      return;
-    }
-
-    // 2. Regra para Entrega Grátis Local (Itanhangá - MT)
-    if (dadosCep.localidade.toLowerCase() === "itanhangá" || cepLimpo === "78578000") {
-      resultadoDiv.className = "frete-resultado gratis";
-      resultadoDiv.innerHTML = `
-        📍 <strong>Localidade:</strong> ${dadosCep.localidade} - ${dadosCep.uf}<br>
-        🎉 <strong>Frete Grátis</strong> para a sua região!
-      `;
-      return;
-    }
-
-    // 3. Consulta de Frete Instantâneo (API de Frete / Simulador)
-    // Exemplo chamando endpoint de cálculo rápido (Melhor Envio / API de Frete)
-    const freteCalculado = await simularCalculoCorreios(cepLimpo, PESO_PRODUTO_KG);
-
-    resultadoDiv.innerHTML = `
-      📍 <strong>Localidade:</strong> ${dadosCep.localidade} - ${dadosCep.uf}
-      <div class="frete-opcao">
-        <span>📦 <strong>PAC:</strong> R$ ${freteCalculado.pac.valor}</span>
-        <span>(${freteCalculado.pac.prazo} dias úteis)</span>
-      </div>
-      <div class="frete-opcao">
-        <span>⚡ <strong>SEDEX:</strong> R$ ${freteCalculado.sedex.valor}</span>
-        <span>(${freteCalculado.sedex.prazo} dias úteis)</span>
-      </div>
-    `;
-
-  } catch (error) {
-    resultadoDiv.innerHTML = "⚠️ Não foi possível obter o valor do frete automaticamente. <br>Consulte via WhatsApp.";
-  }
-}
-
-// Função simuladora de cálculo imediato
-// (Para integrar em produção com backend/API parceira)
-async function simularCalculoCorreios(cepDestino, peso) {
-  // Chamada de API REST de Frete (Ex: Vercel Serverless Function ou API de Frete)
-  // Retorno estruturado retornado instantaneamente:
-  return {
-    pac: { valor: "24,90", prazo: "7 a 10" },
-    sedex: { valor: "48,50", prazo: "3 a 5" }
-  };
-}
-</script>
-
-    
+        async function simularCalculoCorreios(cepDestino, peso) {
+            // Valores simulados de retorno imediato (Pode integrar com API real futuramente)
+            return {
+                pac: { valor: "24,90", prazo: "7 a 10" },
+                sedex: { valor: "48,50", prazo: "3 a 5" }
+            };
+        }
+    </script>
 </body>
 </html>
