@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harpa Cristã - Beduíno Artigos Evangélicos</title>
-    <link rel="stylesheet" href="manifest.json">
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1a2530">
     <style>
         :root {
@@ -197,12 +197,6 @@
             font-size: 0.95rem;
         }
 
-        #freteResultado {
-            margin-top: 0.8rem;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
         .back-container {
             text-align: center;
             margin-bottom: 2rem;
@@ -257,7 +251,7 @@
                     </div>
                     <div class="action-buttons">
                         <button class="btn btn-pix" onclick="pagarPix('Harpa Pentecostal', '33.90')">Pagar com Pix</button>
-                        <a href="https://wa.me/5566984666186?text=Olá!%20Desejo%20comprar%20a%20Harpa%20Pentecostal%20no%20valor%20de%20R%24%2033,90%20%2B%20valor%20do%20Frete." target="_blank" class="btn btn-whatsapp">Pedir via WhatsApp</a>
+                        <button class="btn btn-whatsapp" onclick="enviarPedidoComCep('Harpa Pentecostal (R$ 33,90)')">Pedir via WhatsApp</button>
                     </div>
                 </div>
             </div>
@@ -268,10 +262,10 @@
             <h3>Consultar Frete por CEP</h3>
             <p>Informe seu CEP para calcular o envio (<strong>Itanhangá-MT tem Entrega Grátis!</strong>):</p>
             <div class="frete-input-group">
-                <input type="text" id="cepInput" placeholder="Digite seu CEP (ex: 78578-000)" maxlength="9">
-                <button class="btn btn-pix" onclick="calcularFrete()">Consultar</button>
+                <input type="text" id="inputCep" placeholder="Digite seu CEP (ex: 78578-000)" maxlength="9">
+                <button type="button" class="btn btn-pix" onclick="consultarCepGeral()">Consultar</button>
             </div>
-            <div id="freteResultado"></div>
+            <div id="resultadoFrete" style="font-size: 0.85rem; color: #555; margin-top: 0.8rem;"></div>
         </div>
 
         <!-- Botão Voltar -->
@@ -284,9 +278,10 @@
         <p>&copy; 2026 Beduíno Artigos Evangélicos. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Script de Automação de Pagamento Pix e Consulta de CEP -->
+    <!-- Scripts de Pagamento e CEP -->
     <script>
         const chavePix = "gilinbrazil@gmail.com";
+        var enderecoValidado = "";
 
         function pagarPix(produto, valor) {
             navigator.clipboard.writeText(chavePix).then(() => {
@@ -296,70 +291,56 @@
             });
         }
 
-        function calcularFrete() {
-        <!-- SECÇÃO DE CONSULTA DE FRETE/CEP -->
-<div class="frete-box" style="background: #ffffff; padding: 1rem; border-radius: 8px; border: 1px solid #e0e0e0; margin: 1.5rem 0;">
-    <h4 style="color: #1a2530; margin-bottom: 0.5rem; font-size: 0.95rem;">Calcular Frete e Envio:</h4>
-    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-        <input type="text" id="inputCep" placeholder="Digite seu CEP (Ex: 78575-000)" maxlength="9" style="flex: 1; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;">
-        <button type="button" onclick="consultarCepGeral()" style="background: #1a2530; color: #fff; border: none; padding: 0.6rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold;">Consultar</button>
-    </div>
-    <div id="resultadoFrete" style="font-size: 0.85rem; color: #555;"></div>
-</div>
+        function consultarCepGeral() {
+            var cepInput = document.getElementById('inputCep').value.replace(/\D/g, '');
+            var resDiv = document.getElementById('resultadoFrete');
 
-<script>
-    var enderecoValidado = "";
-
-    function consultarCepGeral() {
-        var cepInput = document.getElementById('inputCep').value.replace(/\D/g, '');
-        var resDiv = document.getElementById('resultadoFrete');
-
-        if (cepInput.length !== 8) {
-            alert('Por favor, digite um CEP válido com 8 dígitos.');
-            return;
-        }
-
-        resDiv.innerHTML = '<span style="color: #666;">A buscar localização...</span>';
-
-        fetch('https://viacep.com.br/ws/' + cepInput + '/json/')
-            .then(function(response) { return response.json(); })
-            .then(function(data) {
-                if (data.erro) {
-                    resDiv.innerHTML = '<span style="color: #c0392b;">CEP não encontrado. Verifique o número digitado.</span>';
-                    enderecoValidado = "";
-                } else {
-                    enderecoValidado = data.logradouro + ' - ' + data.bairro + ', ' + data.localidade + '/' + data.uf;
-                    resDiv.innerHTML = '<div style="background: #f8f9fa; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #d4af37;">' +
-                        '<strong style="color: #1a2530;">Destino:</strong> ' + data.localidade + ' - ' + data.uf + '<br>' +
-                        '<span style="font-size: 0.8rem; color: #555;">O cálculo exato do frete (PAC/SEDEX) será confirmado pelo atendimento via WhatsApp ao enviar seu pedido.</span>' +
-                        '</div>';
-                }
-            })
-            .catch(function(err) {
-                resDiv.innerHTML = '<span style="color: #c0392b;">Erro ao consultar CEP. Tente novamente.</span>';
-                enderecoValidado = "";
-            });
-    }
-
-    function enviarPedidoComCep(nomeProduto) {
-        var cep = document.getElementById('inputCep').value.trim();
-        var numWhats = "5566984666186";
-        
-        var texto = "Olá! Tenho interesse no produto: *" + nomeProduto + "*";
-        if (cep) {
-            texto += "%0A*CEP de Entrega:* " + cep;
-            if (enderecoValidado) {
-                texto += " (" + enderecoValidado + ")";
+            if (cepInput.length !== 8) {
+                alert('Por favor, digite um CEP válido com 8 dígitos.');
+                return;
             }
-        } else {
-            texto += "%0A*(CEP não informado no site)*";
-        }
-        
-        texto += "%0AGostaria de verificar a disponibilidade e o valor do frete para o meu endereço.";
 
-        window.open("https://wa.me/" + numWhats + "?text=" + texto, '_blank');
-    }
-</script>
+            resDiv.innerHTML = '<span style="color: #666;">A buscar localização...</span>';
+
+            fetch('https://viacep.com.br/ws/' + cepInput + '/json/')
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    if (data.erro) {
+                        resDiv.innerHTML = '<span style="color: #c0392b;">CEP não encontrado. Verifique o número digitado.</span>';
+                        enderecoValidado = "";
+                    } else {
+                        enderecoValidado = data.logradouro + ' - ' + data.bairro + ', ' + data.localidade + '/' + data.uf;
+                        resDiv.innerHTML = '<div style="background: #f8f9fa; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #d4af37;">' +
+                            '<strong style="color: #1a2530;">Destino:</strong> ' + data.localidade + ' - ' + data.uf + '<br>' +
+                            '<span style="font-size: 0.8rem; color: #555;">O cálculo exato do frete (PAC/SEDEX) será confirmado pelo atendimento via WhatsApp ao enviar seu pedido.</span>' +
+                            '</div>';
+                    }
+                })
+                .catch(function(err) {
+                    resDiv.innerHTML = '<span style="color: #c0392b;">Erro ao consultar CEP. Tente novamente.</span>';
+                    enderecoValidado = "";
+                });
+        }
+
+        function enviarPedidoComCep(nomeProduto) {
+            var cep = document.getElementById('inputCep').value.trim();
+            var numWhats = "5566984666186";
+            
+            var texto = "Olá! Tenho interesse no produto: *" + nomeProduto + "*";
+            if (cep) {
+                texto += "%0A*CEP de Entrega:* " + cep;
+                if (enderecoValidado) {
+                    texto += " (" + enderecoValidado + ")";
+                }
+            } else {
+                texto += "%0A*(CEP não informado no site)*";
+            }
+            
+            texto += "%0AGostaria de verificar a disponibilidade e o valor do frete para o meu endereço.";
+
+            window.open("https://wa.me/" + numWhats + "?text=" + encodeURI(texto), '_blank');
+        }
+    </script>
 
 </body>
 </html>
