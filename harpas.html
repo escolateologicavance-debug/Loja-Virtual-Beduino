@@ -297,39 +297,69 @@
         }
 
         function calcularFrete() {
-            let cep = document.getElementById("cepInput").value.replace(/\D/g, '');
-            const resultado = document.getElementById("freteResultado");
+        <!-- SECÇÃO DE CONSULTA DE FRETE/CEP -->
+<div class="frete-box" style="background: #ffffff; padding: 1rem; border-radius: 8px; border: 1px solid #e0e0e0; margin: 1.5rem 0;">
+    <h4 style="color: #1a2530; margin-bottom: 0.5rem; font-size: 0.95rem;">Calcular Frete e Envio:</h4>
+    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+        <input type="text" id="inputCep" placeholder="Digite seu CEP (Ex: 78575-000)" maxlength="9" style="flex: 1; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px;">
+        <button type="button" onclick="consultarCepGeral()" style="background: #1a2530; color: #fff; border: none; padding: 0.6rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold;">Consultar</button>
+    </div>
+    <div id="resultadoFrete" style="font-size: 0.85rem; color: #555;"></div>
+</div>
 
-            if (cep.length !== 8) {
-                resultado.style.color = "#c0392b";
-                resultado.innerHTML = "Por favor, digite um CEP válido com 8 dígitos.";
-                return;
-            }
+<script>
+    var enderecoValidado = "";
 
-            // Consulta API pública de CEP ViaCEP
-            fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.erro) {
-                        resultado.style.color = "#c0392b";
-                        resultado.innerHTML = "CEP não encontrado. Verifique e tente novamente.";
-                        return;
-                    }
+    function consultarCepGeral() {
+        var cepInput = document.getElementById('inputCep').value.replace(/\D/g, '');
+        var resDiv = document.getElementById('resultadoFrete');
 
-                    // Verifica se é Itanhangá - MT (ou faixa de CEP de Itanhangá/região próxima se desejar, validando pela cidade)
-                    if (data.localidade && data.localidade.toLowerCase() === "itanhangá" && data.uf === "MT") {
-                        resultado.style.color = "#27ae60";
-                        resultado.innerHTML = `📍 Localidade: ${data.localidade} - ${data.uf}<br>🎉 <strong>Frete Grátis</strong> para Itanhangá-MT!`;
-                    } else {
-                        resultado.style.color = "#d4af37";
-                        resultado.innerHTML = `📍 Localidade: ${data.localidade || 'Região'} - ${data.uf || ''}<br>📦 Frete sob consulta via WhatsApp (Sedex/PAC padrão).`;
-                    }
-                })
-                .catch(error => {
-                    resultado.style.color = "#c0392b";
-                    resultado.innerHTML = "Erro ao consultar o CEP. Tente novamente mais tarde.";
-                });
+        if (cepInput.length !== 8) {
+            alert('Por favor, digite um CEP válido com 8 dígitos.');
+            return;
         }
-    </script>
+
+        resDiv.innerHTML = '<span style="color: #666;">A buscar localização...</span>';
+
+        fetch('https://viacep.com.br/ws/' + cepInput + '/json/')
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (data.erro) {
+                    resDiv.innerHTML = '<span style="color: #c0392b;">CEP não encontrado. Verifique o número digitado.</span>';
+                    enderecoValidado = "";
+                } else {
+                    enderecoValidado = data.logradouro + ' - ' + data.bairro + ', ' + data.localidade + '/' + data.uf;
+                    resDiv.innerHTML = '<div style="background: #f8f9fa; padding: 0.8rem; border-radius: 4px; border-left: 3px solid #d4af37;">' +
+                        '<strong style="color: #1a2530;">Destino:</strong> ' + data.localidade + ' - ' + data.uf + '<br>' +
+                        '<span style="font-size: 0.8rem; color: #555;">O cálculo exato do frete (PAC/SEDEX) será confirmado pelo atendimento via WhatsApp ao enviar seu pedido.</span>' +
+                        '</div>';
+                }
+            })
+            .catch(function(err) {
+                resDiv.innerHTML = '<span style="color: #c0392b;">Erro ao consultar CEP. Tente novamente.</span>';
+                enderecoValidado = "";
+            });
+    }
+
+    function enviarPedidoComCep(nomeProduto) {
+        var cep = document.getElementById('inputCep').value.trim();
+        var numWhats = "5566984666186";
+        
+        var texto = "Olá! Tenho interesse no produto: *" + nomeProduto + "*";
+        if (cep) {
+            texto += "%0A*CEP de Entrega:* " + cep;
+            if (enderecoValidado) {
+                texto += " (" + enderecoValidado + ")";
+            }
+        } else {
+            texto += "%0A*(CEP não informado no site)*";
+        }
+        
+        texto += "%0AGostaria de verificar a disponibilidade e o valor do frete para o meu endereço.";
+
+        window.open("https://wa.me/" + numWhats + "?text=" + texto, '_blank');
+    }
+</script>
+
 </body>
 </html>
